@@ -79,10 +79,10 @@ public class DatabaseRequestService
 						
 				}
 				
-				
 				return domains;
 		}
-		
+
+	
 		// TODO java 8 compliant
 		public List<Group> getGroups(Domain domain, Group group)
 		{
