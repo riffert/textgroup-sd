@@ -90,6 +90,8 @@ public class RootController
 				
 				model.addAttribute("group", group);
 				
+				model.addAttribute("domain", domain.getId());
+				
 				return "list";
 		}
 

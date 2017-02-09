@@ -8,6 +8,7 @@ public class TextgroupApplication
 {
 		public static void main(String[] args)
 		{
+			
 				SpringApplication.run(TextgroupApplication.class, args);
 		}
 }
