@@ -8,7 +8,7 @@ Spring-boot app using hibernate-jpa,spring data and a treeview bootstrap to buil
 5) add language(s)<br>
 6) add text(s)<br>
 <br>
-Take note the project is actually in a rudimentary state but is working fine if install was done properly<br>
+Note : the project is actually in a rudimentary state<br>
 <br>
 <br>
 
