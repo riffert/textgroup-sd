@@ -97,8 +97,11 @@ public class RootController
 				}
 				
 
-				model.addAttribute("domain", domain.getId());
-				model.addAttribute("group", group.getId());
+				model.addAttribute("domain", domain);
+				model.addAttribute("group", group);
+				
+				model.addAttribute("domainid", domain.getId());
+				model.addAttribute("groupid", group.getId());
 
 				model.addAttribute("domains", domains);
 				model.addAttribute("groups", groups);
