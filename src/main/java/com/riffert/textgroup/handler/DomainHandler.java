@@ -18,7 +18,6 @@ import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Text;
 
-//TODO only ref here
 
 @Component
 @Transactional
@@ -38,14 +37,13 @@ public class DomainHandler
 
 		public DomainHandler() {}
 		
-		// TODO -> la méthode doit remonter d'un niveau
+
 		public Group getGroupByName(Domain domain, String groupname)
 		{
 				Group group = domain.getGroupByName(groupname);
 				return group;
 		}
 		
-		// TODO (register context) -> to remove
 		public DomainHandler(AnnotationConfigApplicationContext ctx)
 		{
 				domainRepository = ctx.getBean(DomainRepository.class);
