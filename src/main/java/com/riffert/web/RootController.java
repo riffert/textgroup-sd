@@ -38,7 +38,7 @@ public class RootController
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
-				if ( groups.size() > 0 )
+				if ( groups != null && groups.size() > 0 )
 				{
 						Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
 						
