@@ -80,17 +80,32 @@ public class RootController
 						model.addAttribute("treeview",treeview);
 						model.addAttribute("navs", navs);		
 				}
-
-				model.addAttribute("currentpage", currentpage);
-				model.addAttribute("keyword",keyword);
-				model.addAttribute("pagesize",pagesize);
 				
+				if ( domain == null)
+				{
+						System.out.println("domain is null !");
+						domain = new Domain("");
+						domain.setId((long) 1);
+						
+				}
+				
+				if ( group == null)
+				{
+						System.out.println("group is null !");
+						group = new Group("");
+						group.setId((long) 1);
+				}
+				
+
+				model.addAttribute("domain", domain.getId());
+				model.addAttribute("group", group.getId());
+
 				model.addAttribute("domains", domains);
 				model.addAttribute("groups", groups);
 				
-				model.addAttribute("group", group);
-				
-				model.addAttribute("domain", domain.getId());
+				model.addAttribute("currentpage", currentpage);
+				model.addAttribute("keyword",keyword);
+				model.addAttribute("pagesize",pagesize);
 				
 				return "list";
 		}
