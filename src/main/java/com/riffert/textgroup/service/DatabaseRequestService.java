@@ -145,13 +145,10 @@ public class DatabaseRequestService
 				return languageRepository.searchByEnglishKeyword("%"+keyword+"%",new PageRequest(currentpage, pagesize));
 		}
 		
-		public void addGroup(String domain,String groupName, String userGroupName)
+		public void addGroup(Domain domain,String groupName, String userGroupName)
 		{
-			
-				if ( domain == null )
-					return ;
 				
-				domainHandler.addGroup(new Domain(domain), new Group(groupName,userGroupName));
+				domainHandler.addGroup(domain, new Group(groupName,userGroupName));
 		}
 		
 }

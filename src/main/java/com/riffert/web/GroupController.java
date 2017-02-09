@@ -16,17 +16,15 @@ public class GroupController
 		private DatabaseRequestService databaseRequestService;
 
 		@RequestMapping(value="/addGroup")
-		public String addGroup(Model model,@RequestParam(defaultValue="")String groupname,
-				@RequestParam(defaultValue="")String usergroupname,
-				@RequestParam(defaultValue="")String domain)
+		public String addGroup(Model model,
+				@RequestParam(defaultValue="1")Domain domain,
+				@RequestParam(defaultValue="")String groupname,
+				@RequestParam(defaultValue="")String usergroupname)
 		{		
 				System.out.println("adding groupName : "+groupname);
 				
-				if ( groupname != "" )
-				{
-						databaseRequestService.addGroup(domain, groupname, usergroupname );
-				}
+				databaseRequestService.addGroup(domain, groupname, usergroupname );
 			
-				return "redirect:/?groupName="+groupname;
+				return "/";
 		}
 }

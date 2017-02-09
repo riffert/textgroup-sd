@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.riffert.bootstrap.Nav;
+import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Language;
 import com.riffert.textgroup.service.DatabaseRequestService;
 
@@ -19,6 +20,7 @@ public class LanguageController
 		
 		@RequestMapping(value="/chooseLang")
 		public String chooseLanguage(Model model,
+				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="0")int currentpage,
 				@RequestParam(defaultValue="eng")String groupname,
 				@RequestParam(defaultValue="")String keyword,
@@ -43,6 +45,7 @@ public class LanguageController
 				
 				model.addAttribute("languages", languages);
 	
+				model.addAttribute("domain",domain.getId());
 				model.addAttribute("currentpage", currentpage);
 				model.addAttribute("keyword",keyword);
 				model.addAttribute("pagesize",pagesize);
