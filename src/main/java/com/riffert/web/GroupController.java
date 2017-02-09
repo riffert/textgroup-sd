@@ -22,8 +22,6 @@ public class GroupController
 				@RequestParam(defaultValue="")String usergroupname)
 		{		
 			
-				System.out.println("test");
-				
 				databaseRequestService.addGroup(domain, groupname, usergroupname );
 			
 				return "/";
