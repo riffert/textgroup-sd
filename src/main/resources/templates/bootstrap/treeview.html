@@ -1,0 +1,23 @@
+
+<script type="text/javascript">
+
+	$(function() {
+
+        var treeviewData =
+        [
+			  {{#treeview.nodes}}
+			  	{{>bootstrap/nodes}}
+	          {{/treeview.nodes}}
+        ];
+
+        $('#treeview1').treeview({
+          data: treeviewData,
+          enableLinks : true       
+        });
+
+
+        
+	});
+
+
+</script>

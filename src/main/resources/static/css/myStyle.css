@@ -1,0 +1,60 @@
+
+.spacer {
+	margin-top: 40px;	
+}
+
+.tv-row {
+	display:inline;
+	line-height: 9px;
+}
+
+
+
+/* title */
+
+.col-title-0 {
+	width: 40px;
+}
+
+.col-title-1 {
+	width: 45px;	
+}
+
+.col-title-2 {
+	width: 40px;	
+}
+
+
+
+/* parent row */
+
+.col-0 {
+	width: 10px;
+}
+
+.col-1 {
+	width: 50px;
+	font-weight: bold;
+}
+
+.col-2 {
+	width: 300px;
+}
+
+.col-3 {
+	width: 50px;
+}
+
+
+
+/* child row */
+
+.chi-0 {
+	width: 40px;
+}
+
+.chi-1 {
+	width: 50px;
+	/*font-weight: bold;*/
+	font-style: italic;
+}

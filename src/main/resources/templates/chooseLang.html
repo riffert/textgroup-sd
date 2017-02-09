@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Translation user interface</title>
+		
+		{{>head/css}}
+		
+		{{>head/js}}
+		
+		{{>bootstrap/treeview}}		
+		
+	</head>
+	
+	<body>
+
+		<div class="container spacer" style="display:inline;" ></div>
+		
+		<div class="container spacer" >
+		
+				<form action="/chooseLang" method="get" style="display:inline;">
+						<label>Keyword :</label>
+						<input type="text" name="keyword" value="{{keyword}}"/>
+						<input type="hidden" name="groupname" value="{{groupname}}"/>
+						<input type="hidden" name="dest" value="{{dest}}"/>
+						<button type="submit">search</button>
+				</form>		
+		
+		</div>
+
+		{{>body/pageLang}}			
+	
+		{{>div/spacer-h}}
+		
+		<div class="container">
+			<ul class="nav nav-pills">
+				<li class="">
+					<a href="#"><</a>
+				</li>
+				{{#navs}}
+				<li class="{{style}}">
+					<a href="/chooseLang?dest={{dest}}&currentpage={{id}}&groupname={{groupname}}&keyword={{keyword}}">{{displayId}}</a>
+				</li>
+				{{/navs}}
+				<li class="">
+					<a href="#">></a>
+				</li>
+			</ul>
+		</div>							
+			
+	</body>
+</html>

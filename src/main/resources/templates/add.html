@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"/>
+		
+		<title>add</title>
+		
+				<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-3.3.4.css">
+	
+			    <script src="bower_components/jquery/dist/jquery.js"></script>
+			
+			  	<script src="js/bootstrap-treeview.js"></script>
+		
+				{{>head/css}}
+		
+	</head>
+	
+	<body>
+	
+			<div class="container spacer" style="display:inline;" ></div>
+	
+			<div class="container spacer" >
+
+					<form action="/save" method="post" style="display:inline;">
+					
+						<input type="hidden" name="group" value="1">
+	
+						<table>
+				
+								{{#groups}}
+										<tr>
+												<td>
+														<label>{{userName}} :&nbsp;</label>
+												</td>
+							
+												<td>					
+														<input name="{{name}}" size="80">		
+												</td>			
+										</tr>
+										
+										<tr>
+												<td colspan="2">
+													&nbsp;
+												</td>			
+										</tr>
+								{{/groups}}
+												
+								<tr>
+										<td>
+											&nbsp;
+										</td>			
+								
+										<td>
+												<button type="submit">Save</button>
+										</td>			
+								</tr>
+			
+						</table>
+				
+				</form>
+				
+			</div>
+	</body>
+</html>		
+						

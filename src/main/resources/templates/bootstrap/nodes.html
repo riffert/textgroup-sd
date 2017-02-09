@@ -1,0 +1,12 @@
+	          {
+		            text: '<table class="tv-row"><tr><td class="col-0"></td><td class="col-1">{{equivalence}}</td><td class="col-2">{{text}}</td><td class="col-3"></td><td></td></tr></table>',
+		            backColor: "{{bgColor}}",
+		            href : "edit?equivalence={{equivalence}}",
+	          		state: { expanded: false }
+					{{begin}}
+			            {{#nodes}}
+			            	{{>bootstrap/nodes}}
+		            	{{/nodes}}
+					{{end}}
+	          }
+	       	  {{c}}

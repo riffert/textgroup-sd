@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Translation user interface</title>
+		
+<!-- 		<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7.min.css" />		 -->
+
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-3.3.4.css">
+	
+	    <script src="bower_components/jquery/dist/jquery.js"></script>
+	
+	  	<script src="js/bootstrap-treeview.js"></script>
+		
+		{{>head/css}}
+		
+		{{>head/js}}
+		
+		{{>bootstrap/treeview}}
+		
+	</head>
+	
+	<body>
+
+		<div class="container spacer" style="display:inline;" ></div>
+
+		<div class="container spacer" >
+
+				<label>Domain :</label>
+				<select class="combobox" onchange="domx(this)" style="width: 150px;">
+					{{#domains}}
+						<option value="{{id}}" {{{selected}}}>{{name}}</option>
+					{{/domains}}
+				</select>
+				<input type="button" value="+" onclick="addDomain();">
+				<input type="button" value="-" onclick="RemoveComboItem();">
+
+				<div class="spacer" style="display:inline;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>			
+
+				<label>Language :</label>
+				<select class="combobox" onchange="language(this)" style="width: 150px;">
+					{{#groups}}
+						<option value="{{id}}" {{{selected}}}>{{userName}}</option>
+					{{/groups}}
+				</select>
+				<input type="button" value="+" onclick="addGroup();" title="add language">
+				<input type="button" value="-" onclick="RemoveGroup();">
+				
+				<div class="spacer" style="display:inline;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+
+				<form action="/" method="get" style="display:inline;">
+						<label>Search :</label>
+						<input type="text" name="keyword" value="{{keyword}}"/>
+						<input type="hidden" name="group" value="group"/>
+						<button type="submit">search</button>
+				</form>
+				
+				<div class="spacer" style="display:inline;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>					
+				
+				<a href="add">Add</a>
+				
+		</div>
+
+		{{>body/pageList}}
+
+		{{>div/spacer-h}}
+		
+		{{>bootstrap/nav}}
+			
+	</body>
+</html>

@@ -1,0 +1,43 @@
+		<script type="text/javascript">
+
+			function domx(thelist)
+			{
+				  var idx = thelist.selectedIndex;
+				  var value = thelist.options[idx].value;
+				  window.location = "/?domain="+value;
+			}
+		
+			function language(thelist)
+			{
+				  var idx = thelist.selectedIndex;
+				  var value = thelist.options[idx].value;
+				  window.location = "/?group="+value;
+			}
+
+		    function addComboItem()
+		    {
+			    	alert("add combo item");
+		    }
+
+		    function addDomain()
+		    {
+		    		window.location = "inputDomain";
+		    }
+
+		    function addGroup()
+		    {
+		    		window.location = "chooseLang?dest=addGroup";
+		    }
+		    
+		    function addText()
+		    {
+		    		window.location = "chooseLang?dest=addText";
+		    }
+
+		    function RemoveComboItem()
+		    {
+		    		alert("remove");
+		    }
+		    			
+		    
+		</script>

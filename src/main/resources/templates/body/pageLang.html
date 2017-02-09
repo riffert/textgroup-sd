@@ -1,0 +1,19 @@
+			<div class="container spacer">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th> <th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#languages.content}}
+						<tr>
+							<td>{{pk}}</td>
+							<td>{{alpha3B}}</td>
+							<td>{{english}}</td>
+							<td><a href="{{dest}}?groupname={{alpha3B}}&usergroupname={{english}}">add language</a></td>
+						</tr>
+						{{/languages.content}}
+					</tbody>
+				</table>
+			</div>
