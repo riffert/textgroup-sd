@@ -42,7 +42,7 @@ public class RootController
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
-				if ( flag.equals("1") ) group = groups.get(0);
+				if ( flag.equals("1") && groups.size() > 0 ) group = groups.get(0);
 				
 				Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
 				
