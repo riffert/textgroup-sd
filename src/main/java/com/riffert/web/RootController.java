@@ -25,6 +25,7 @@ public class RootController
 		@Autowired
 		private DatabaseRequestService databaseRequestService;
 		
+		@SuppressWarnings("unused")
 		@RequestMapping(value="/")
 		public String index(Model model,
 				@RequestParam(defaultValue="0")int currentpage,
@@ -33,6 +34,8 @@ public class RootController
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="1")Group group)
 		{
+			
+				System.out.println("domain : "+domain.getId()+", group :"+group.getId());
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
 				
@@ -86,7 +89,6 @@ public class RootController
 						System.out.println("domain is null !");
 						domain = new Domain("");
 						domain.setId((long) 1);
-						
 				}
 				
 				if ( group == null)

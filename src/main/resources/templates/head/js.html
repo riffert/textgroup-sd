@@ -4,7 +4,7 @@
 			{
 				  var idx = thelist.selectedIndex;
 				  var value = thelist.options[idx].value;
-				  window.location = "/?domain="+value;
+				  window.location = "/?group={{groupid}}&domain="+value;
 			}
 		
 			function language(thelist)
@@ -12,7 +12,7 @@
 				  var idx = thelist.selectedIndex;
 				  var value = thelist.options[idx].value;
 
-				  window.location = "/?group="+value;
+				  window.location = "/?domain={{domainid}}&group="+value;
 			}
 
 		    function addComboItem()
