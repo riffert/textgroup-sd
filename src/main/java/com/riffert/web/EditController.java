@@ -30,6 +30,10 @@ public class EditController
 		{
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
+				model.addAttribute("domainid", domain.getId());
+				model.addAttribute("groupid", group.getId());
+				
+				
 				model.addAttribute("groups", groups);
 				
 				return "add";
