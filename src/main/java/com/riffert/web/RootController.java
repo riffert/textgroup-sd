@@ -25,7 +25,6 @@ public class RootController
 		@Autowired
 		private DatabaseRequestService databaseRequestService;
 		
-		@SuppressWarnings("unused")
 		@RequestMapping(value="/")
 		public String index(Model model,
 				@RequestParam(defaultValue="0")int currentpage,
@@ -38,12 +37,23 @@ public class RootController
 			
 				//System.out.print("domain : "+domain.getId()+", group :"+group.getId());
 			
+				boolean bFlag = true;
+			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
-				if ( flag.equals("1") && groups.size() > 0 ) group = groups.get(0);
+				if ( flag.equals("1") )
+				{
+					if ( groups.size() > 0 )
+						group = groups.get(0);
+					else
+						bFlag = false;
+				}
 				
+				if ( bFlag )
+				{
+
 				Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
 				
 				Nav[] navs = null;
@@ -80,10 +90,14 @@ public class RootController
 				
 				treeview.validate();  // mandatory
 				
+				
+				
 				model.addAttribute("pageTexts", pageTexts);
 				model.addAttribute("treeview",treeview);
 				model.addAttribute("navs", navs);		
 
+				}
+				
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
 				
