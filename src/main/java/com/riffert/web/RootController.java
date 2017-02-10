@@ -87,7 +87,18 @@ public class RootController
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
 				
+				if (domain == null )
+				{
+					domain = new Domain("");
+					domain.setId((long) 1);
+				}
 				model.addAttribute("domainid", domain.getId());
+				
+				if (group == null )
+				{
+					group = new Group("");
+					group.setId((long) 1);
+				}
 				model.addAttribute("groupid", group.getId());
 
 				model.addAttribute("domains", domains);
