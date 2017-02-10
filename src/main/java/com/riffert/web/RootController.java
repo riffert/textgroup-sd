@@ -32,19 +32,25 @@ public class RootController
 				@RequestParam(defaultValue="")String keyword,
 				@RequestParam(defaultValue="5")int pagesize,
 				@RequestParam(defaultValue="1")Domain domain,
-				@RequestParam(defaultValue="1")Group group)
+				@RequestParam(defaultValue="1")Group group,
+				@RequestParam(defaultValue="0")String flag)
 		{
 			
-				System.out.println("domain : "+domain.getId()+", group :"+group.getId());
+				//System.out.print("domain : "+domain.getId()+", group :"+group.getId());
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
-				if ( groups != null && groups.size() > 0 )
-				{
-						Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
-						
+				if ( flag.equals("1") ) group = groups.get(0);
+				
+				Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
+				
+				//if ( pageTexts != null && pageTexts.getSize() > 0 )
+				//{
+				
+						//System.out.println(" ,size : "+pageTexts.getSize());
+				
 						Nav[] navs = null;
 						
 						int pagesCount = pageTexts.getTotalPages();
@@ -82,21 +88,21 @@ public class RootController
 						model.addAttribute("pageTexts", pageTexts);
 						model.addAttribute("treeview",treeview);
 						model.addAttribute("navs", navs);		
-				}
+				//}
 				
-				if ( domain == null)
-				{
-						System.out.println("domain is null !");
-						domain = new Domain("");
-						domain.setId((long) 1);
-				}
-				
-				if ( group == null)
-				{
-						System.out.println("group is null !");
-						group = new Group("");
-						group.setId((long) 1);
-				}
+//				if ( domain == null)
+//				{
+//						System.out.println("domain is null !");
+//						domain = new Domain("");
+//						domain.setId((long) 1);
+//				}
+//				
+//				if ( group == null)
+//				{
+//						System.out.println("group is null !");
+//						group = new Group("");
+//						group.setId((long) 1);
+//				}
 				
 
 				model.addAttribute("domain", domain);
