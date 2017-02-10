@@ -46,64 +46,43 @@ public class RootController
 				
 				Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
 				
-				//if ( pageTexts != null && pageTexts.getSize() > 0 )
-				//{
+				Nav[] navs = null;
 				
-						//System.out.println(" ,size : "+pageTexts.getSize());
+				int pagesCount = pageTexts.getTotalPages();
 				
-						Nav[] navs = null;
+				navs = new Nav[pagesCount];
+				
+				for (int i=0;i<pagesCount;i++){
+					navs[i] = new Nav(i,currentpage);
+				}
+				
+				Treeview treeview = new Treeview();
+				
+				for (Text text:pageTexts)
+				{
+						Equivalence equivalence = text.getEquivalence();
 						
-						int pagesCount = pageTexts.getTotalPages();
+						TextNode textnode = new TextNode(text.getValue(), equivalence.getId()+"");
+						Node node = treeview.addNode(textnode);
 						
-						navs = new Nav[pagesCount];
+						List<Text> texts = equivalence.getTexts();
 						
-						for (int i=0;i<pagesCount;i++){
-							navs[i] = new Nav(i,currentpage);
-						}
-						
-						Treeview treeview = new Treeview();
-						
-						for (Text text:pageTexts)
+						for (Text txt:texts)
 						{
-								Equivalence equivalence = text.getEquivalence();
+								String value = txt.getValue();
+								equivalence = txt.getEquivalence();
 								
-								TextNode textnode = new TextNode(text.getValue(), equivalence.getId()+"");
-								Node node = treeview.addNode(textnode);
-								
-								List<Text> texts = equivalence.getTexts();
-								
-								for (Text txt:texts)
-								{
-										String value = txt.getValue();
-										equivalence = txt.getEquivalence();
-										
-										if (txt.getGroup() != group) {
-											node.addChild(new TextNode(value, equivalence.getId()+""));
-										}
+								if (txt.getGroup() != group) {
+									node.addChild(new TextNode(value, equivalence.getId()+""));
 								}
 						}
-						
-						treeview.validate();  // mandatory
-						
-						model.addAttribute("pageTexts", pageTexts);
-						model.addAttribute("treeview",treeview);
-						model.addAttribute("navs", navs);		
-				//}
+				}
 				
-//				if ( domain == null)
-//				{
-//						System.out.println("domain is null !");
-//						domain = new Domain("");
-//						domain.setId((long) 1);
-//				}
-//				
-//				if ( group == null)
-//				{
-//						System.out.println("group is null !");
-//						group = new Group("");
-//						group.setId((long) 1);
-//				}
+				treeview.validate();  // mandatory
 				
+				model.addAttribute("pageTexts", pageTexts);
+				model.addAttribute("treeview",treeview);
+				model.addAttribute("navs", navs);		
 
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
