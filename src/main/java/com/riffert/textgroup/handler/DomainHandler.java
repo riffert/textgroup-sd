@@ -80,7 +80,7 @@ public class DomainHandler
 		
 		public void updateText(Long id,String text)
 		{
-			textRepository.updateText(id, text);
+				textRepository.updateText(id, text);
 		}
 
 

@@ -26,12 +26,6 @@ public interface TextRepository extends JpaRepository<Text, Long>
 		@Modifying
 	    @Query("UPDATE Text t SET t.value = :text WHERE t.id = :id")
 	    int updateText(@Param("id") Long id, @Param("text") String text);		
-		
-		
-		// sample
-//		@Modifying
-//	    @Query("UPDATE Company c SET c.address = :address WHERE c.id = :companyId")
-//	    int updateAddress(@Param("companyId") int companyId, @Param("address") String address);		
 	
 		// searching in all languages of all domains, equivalent as previous
 		@Query("select t from Text t where t.value like :v")
@@ -41,12 +35,11 @@ public interface TextRepository extends JpaRepository<Text, Long>
 		@Query("select t from Text t where t.value like :v and t.domain = :d")
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "d") Domain domain,Pageable p);
 
-		// searching in same language of same domain
+		// searching in same group
 		@Query("select t from Text t where t.value like :v and t.group = :g")
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "g") Group group,Pageable p);
 		
 		@Query("select t from Text t where t.equivalence = :e ")
 		List<Text> search(@Param(value = "e") Equivalence equivalence);
-
 
 }
