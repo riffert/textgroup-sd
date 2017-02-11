@@ -21,11 +21,12 @@ import com.riffert.textgroup.entity.Text;
 @Transactional
 public interface TextRepository extends JpaRepository<Text, Long>
 {
-		Page<Text> findByValueLike(String v,Pageable p);
 
 		@Modifying
 	    @Query("UPDATE Text t SET t.value = :text WHERE t.id = :id")
-	    int updateText(@Param("id") Long id, @Param("text") String text);		
+	    int updateText(@Param("id") Long id, @Param("text") String text);
+		
+		Page<Text> findByValueLike(String v,Pageable p);
 	
 		// searching in all languages of all domains, equivalent as previous
 		@Query("select t from Text t where t.value like :v")
