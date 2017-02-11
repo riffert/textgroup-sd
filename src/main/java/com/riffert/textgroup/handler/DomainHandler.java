@@ -77,6 +77,11 @@ public class DomainHandler
 				
 				return text;
 		}
+		
+		public void updateText(Long id,String text)
+		{
+			textRepository.updateText(id, text);
+		}
 
 
 		public Group addGroup(Domain domain,Group group)

@@ -40,24 +40,15 @@ public class EditController
 		}
 		
 		@RequestMapping(value="/edit")
-		public String edit(Model model,
-				@RequestParam(defaultValue="1")Domain domain,
-				@RequestParam(defaultValue="1")Group group,
-				@RequestParam(defaultValue="1")Equivalence equivalence)
+		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence)
 		{
-				//List<Group> groups = databaseRequestService.getGroups(domain,group);
 				List<Text> texts = equivalence.getTexts();
-				
-				//model.addAttribute("group", group);
-				model.addAttribute("equivalence", equivalence);
 				model.addAttribute("texts", texts);
-				
 				
 				return "edit";
 		}
 		
-		
-		
+	
 		@RequestMapping(value="/save",method=RequestMethod.POST)
 		public String save(Model model,@RequestParam Map<String, String> params,
 						@RequestParam(defaultValue="1")Domain domain,
@@ -80,12 +71,16 @@ public class EditController
 		@RequestMapping(value="/update",method=RequestMethod.POST)
 		public String update(@RequestParam Map<String, String> params)
 		{		
-				System.out.println("[update]");
-
-				//List<Text> texts = equivalence.getTexts();
+				for (String key : params.keySet())
+				{
+						//System.out.println("key : "+key+", value : "+params.get(key) );
+						databaseRequestService.updateText(Long.parseLong(key), params.get(key));
+				}
 				
 				return "/";
 		}
+		
+		
 		
 //		@RequestMapping(value="/update",method=RequestMethod.POST)
 //		public String update(@RequestParam Map<String, String> params)

@@ -17,8 +17,6 @@ import com.riffert.textgroup.handler.DomainHandler;
 import com.riffert.textgroup.handler.TextHandler;
 
 
-// conversion des string -> reference dans la présente couche
-
 @Service
 public class DatabaseRequestService
 {
@@ -30,6 +28,11 @@ public class DatabaseRequestService
 		
 		@Autowired
 		private LanguageRepository languageRepository; // TODO uniquement des handler ici
+		
+		public void updateText(Long id,String text)
+		{
+				domainHandler.updateText(id, text);
+		}
 		
 		public void deleteText(Text text)
 		{

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,16 @@ import com.riffert.textgroup.entity.Text;
 public interface TextRepository extends JpaRepository<Text, Long>
 {
 		Page<Text> findByValueLike(String v,Pageable p);
+
+		@Modifying
+	    @Query("UPDATE Text t SET t.value = :text WHERE t.id = :id")
+	    int updateText(@Param("id") Long id, @Param("text") String text);		
+		
+		
+		// sample
+//		@Modifying
+//	    @Query("UPDATE Company c SET c.address = :address WHERE c.id = :companyId")
+//	    int updateAddress(@Param("companyId") int companyId, @Param("address") String address);		
 	
 		// searching in all languages of all domains, equivalent as previous
 		@Query("select t from Text t where t.value like :v")
@@ -36,4 +47,6 @@ public interface TextRepository extends JpaRepository<Text, Long>
 		
 		@Query("select t from Text t where t.equivalence = :e ")
 		List<Text> search(@Param(value = "e") Equivalence equivalence);
+
+
 }
