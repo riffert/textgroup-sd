@@ -120,10 +120,10 @@ public class DomainHandler
 		{
 				Map<String, List<Text>> hm = new HashMap<String, List<Text>>();
 				
-				Domain domain = new Domain("default");
-				domain.setId((long) 1);
+//				Domain domain = new Domain("default");
+//				domain.setId((long) 1);
 				
-				//Domain domain = getDomain(domain);
+				Domain domain = domainRepository.findOne((long) 1);
 				
 				
 				List<Group> groups = domain.getGroups(); // EAGER fetch : start from 1?
