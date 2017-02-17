@@ -26,12 +26,14 @@ public class EditController
 		@RequestMapping(value="/add")
 		public String add(Model model,
 				@RequestParam(defaultValue="1")Domain domain,
-				@RequestParam(defaultValue="1")Group group)
+				@RequestParam(defaultValue="1")Group group,
+				@RequestParam(defaultValue="0")int currentpage)
 		{
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
 				model.addAttribute("domainid", domain.getId());
 				model.addAttribute("groupid", group.getId());
+				model.addAttribute("currentpage", currentpage);
 				
 				
 				model.addAttribute("groups", groups);
@@ -40,10 +42,12 @@ public class EditController
 		}
 		
 		@RequestMapping(value="/edit")
-		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence)
+		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence,
+				@RequestParam(defaultValue="0")int currentpage)
 		{
 				List<Text> texts = equivalence.getTexts();
 				model.addAttribute("texts", texts);
+				model.addAttribute("currentpage", currentpage);
 				
 				return "edit";
 		}
@@ -52,7 +56,8 @@ public class EditController
 		@RequestMapping(value="/save",method=RequestMethod.POST)
 		public String save(Model model,@RequestParam Map<String, String> params,
 						@RequestParam(defaultValue="1")Domain domain,
-						@RequestParam(defaultValue="1")Group group)
+						@RequestParam(defaultValue="1")Group group,
+						@RequestParam(defaultValue="0")int currentpage)
 		{		
 			
 				Equivalence equivalence = databaseRequestService.getNewEquivalence(group);
@@ -65,7 +70,7 @@ public class EditController
 						databaseRequestService.addText(groop, new Text(text),equivalence);
 				}
 			
-				return "/";
+				return "redirect:/?currentpage="+currentpage;
 		}
 
 		@RequestMapping(value="/update",method=RequestMethod.POST)
@@ -77,7 +82,12 @@ public class EditController
 						databaseRequestService.updateText(Long.parseLong(key), params.get(key));
 				}
 				
-				return "/";
+				String currentpage = params.get("currentpage");
+		
+				if (currentpage == null )
+					return "redirect:/";
+				else
+					return "redirect:/?currentpage="+currentpage;
 		}
 		
 		

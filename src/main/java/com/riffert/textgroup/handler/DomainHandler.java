@@ -126,14 +126,14 @@ public class DomainHandler
 				Domain domain = domainRepository.findOne((long) 1);
 				
 				
-				List<Group> groups = domain.getGroups(); // EAGER fetch : start from 1?
+				List<Group> groups = domain.getGroups();
 				int qty = groups.size();
 				
 				System.out.println("Domain "+domain.getName()+" has "+qty+" languages");
 				
 				for (int i=0;i<qty;i++) 
 				{
-						Group group = groups.get(i); // LAZY fetch : start from 0
+						Group group = groups.get(i);
 						hm.put(group.getName(), group.getTexts()); System.out.println("["+group.getName()+"] loaded,"+group.getTexts().size()+" items");
 				}
 				
