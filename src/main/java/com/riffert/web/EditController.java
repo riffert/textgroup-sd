@@ -31,8 +31,8 @@ public class EditController
 		{
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
-				model.addAttribute("domainid", domain.getId());
-				model.addAttribute("groupid", group.getId());
+				model.addAttribute("domain", domain);
+				model.addAttribute("group", group);
 				model.addAttribute("currentpage", currentpage);
 				
 				
