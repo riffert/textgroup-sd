@@ -12,7 +12,7 @@
 				  var idx = thelist.selectedIndex;
 				  var value = thelist.options[idx].value;
 
-				  window.location = "/?domain={{domainid}}&group="+value;
+				  window.location = "/?domain={{domain.id}}&group="+value;
 			}
 
 		    function addComboItem()
@@ -27,7 +27,7 @@
 
 		    function addGroup()
 		    {
-		    		window.location = "chooseLang?domain={{domainid}}";
+		    		window.location = "chooseLang?domain={{domain.id}}";
 		    }
 		    
 		    function addText()

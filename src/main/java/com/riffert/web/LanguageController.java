@@ -46,7 +46,7 @@ public class LanguageController
 				model.addAttribute("languages", languages);
 	
 				model.addAttribute("domain",domain);
-				model.addAttribute("domainid",domain.getId());
+				
 				
 				model.addAttribute("currentpage", currentpage);
 				model.addAttribute("keyword",keyword);

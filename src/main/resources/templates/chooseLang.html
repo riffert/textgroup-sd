@@ -24,7 +24,7 @@
 						<label>Keyword :</label>
 						<input type="text" name="keyword" value="{{keyword}}"/>
 						<input type="hidden" name="groupname" value="{{groupname}}"/>
-						<input type="hidden" name="domain" value="{{domainid}}"/>
+						<input type="hidden" name="domain" value="{{domain.id}}"/>
 						<button type="submit">search</button>
 				</form>		
 		
@@ -41,7 +41,7 @@
 				</li>
 				{{#navs}}
 				<li class="{{style}}">
-					<a href="/chooseLang?currentpage={{id}}&domain={{domainid}}&groupname={{groupname}}&keyword={{keyword}}">{{displayId}}</a>
+					<a href="/chooseLang?currentpage={{id}}&domain={{domain.id}}&groupname={{groupname}}&keyword={{keyword}}">{{displayId}}</a>
 				</li>
 				{{/navs}}
 				<li class="">
