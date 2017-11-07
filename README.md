@@ -8,6 +8,7 @@ Spring-boot app using hibernate-jpa,spring data and a treeview bootstrap to buil
 5) add language(s)<br>
 6) add text(s)<br>
 <br>
+Note : To read the database in a non spring-boot app,you can copy the config package in your app and update your web.xml file to configure the listener for the Init class to load the map (hm) with the values at startup.
 <br>
 
 
