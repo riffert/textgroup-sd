@@ -113,6 +113,19 @@ public class Group implements Serializable
 		public List<Text> getTexts() {
 			return texts;
 		}
+		
+		public List<Text> getTextsFrom1()
+		{
+			List<Text> txts = new ArrayList<Text>();
+			txts.add(new Text(""));
+			
+			for (Text txt:texts)
+			{
+				txts.add(txt);
+			}
+			
+			return txts;
+		}		
 
 		public void setTexts(List<Text> texts) {
 			this.texts = texts;

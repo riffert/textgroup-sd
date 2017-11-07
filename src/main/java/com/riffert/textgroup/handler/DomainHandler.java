@@ -134,7 +134,8 @@ public class DomainHandler
 				for (int i=0;i<qty;i++) 
 				{
 						Group group = groups.get(i);
-						hm.put(group.getName(), group.getTexts()); System.out.println("["+group.getName()+"] loaded,"+group.getTexts().size()+" items");
+						List<Text> texts = group.getTextsFrom1();
+						hm.put(group.getName(), texts); System.out.println("["+group.getName()+"] loaded,"+(texts.size()-1)+" items");
 				}
 				
 				return hm;
