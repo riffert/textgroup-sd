@@ -48,8 +48,18 @@ public class JpaHsqlConfig implements DisposableBean {
         return lcemfb;
  
     }    
+    
+    
+    /* to include in pom.xml :
+     * <dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.4</version>
+		</dependency>
+
+     */
  
-    @Bean(name="hsqlInMemory")
+    //@Bean(name="hsqlInMemory")  Uncomment if you want to use hsql database
     public EmbeddedDatabase hsqlInMemory() {
  
         if ( this.ed == null ) {
