@@ -15,6 +15,7 @@ import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Text;
+import com.riffert.textgroup.handler.DomainHandler;
 import com.riffert.textgroup.service.DatabaseRequestService;
 
 @Controller
@@ -22,6 +23,9 @@ public class EditController
 {
 		@Autowired
 		private DatabaseRequestService databaseRequestService;
+		
+		@Autowired
+		private DomainHandler domainHandler;
 
 		@RequestMapping(value="/add")
 		public String add(Model model,
@@ -34,8 +38,6 @@ public class EditController
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
 				model.addAttribute("currentpage", currentpage);
-				
-				
 				model.addAttribute("groups", groups);
 				
 				return "add";
@@ -43,13 +45,41 @@ public class EditController
 		
 		@RequestMapping(value="/edit")
 		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence,
-				@RequestParam(defaultValue="0")int currentpage)
+				@RequestParam(defaultValue="0")int currentpage,
+				@RequestParam(defaultValue="1")Domain domain)
 		{
+				List<Group> groups = databaseRequestService.getGroups(domain,new Group());
 				List<Text> texts = equivalence.getTexts();
+			
+				for(Group grp:groups)
+				{
+						if (!isGroupPresent(grp,texts))
+						{
+							Text text = new Text("");
+							text.setEquivalence(equivalence);
+							text.setGroup(grp);
+							text.setDomain(domain);
+							grp.add(text);
+							
+							domainHandler.addText(text, equivalence, grp);
+						}
+				}
+				
+				texts = equivalence.getTexts();
+				
 				model.addAttribute("texts", texts);
 				model.addAttribute("currentpage", currentpage);
 				
 				return "edit";
+		}
+		
+		private boolean isGroupPresent(Group group,List<Text> texts)
+		{
+				for(Text text:texts)
+					if (group == text.getGroup())
+						return true;
+
+				return false;
 		}
 		
 	

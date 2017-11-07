@@ -8,8 +8,6 @@ Spring-boot app using hibernate-jpa,spring data and a treeview bootstrap to buil
 5) add language(s)<br>
 6) add text(s)<br>
 <br>
-Note : add all your languages before adding texts, however you can add at any time a language but the previously added texts will be only available with the languages used before, this case is not managed in this version<br>
-<br>
 <br>
 
 

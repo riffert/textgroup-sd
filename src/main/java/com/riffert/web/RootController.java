@@ -98,15 +98,11 @@ public class RootController
 
 				}
 				
-				model.addAttribute("domain", domain);
-				model.addAttribute("group", group);
-				
 				if (domain == null )
 				{
 					domain = new Domain("");
 					domain.setId((long) 1);
 				}
-
 				
 				if (group == null )
 				{
@@ -114,7 +110,9 @@ public class RootController
 					group.setId((long) 1);
 				}
 
-
+				model.addAttribute("domain", domain);
+				model.addAttribute("group", group);
+				
 				model.addAttribute("domains", domains);
 				model.addAttribute("groups", groups);
 				
