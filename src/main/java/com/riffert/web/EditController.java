@@ -69,6 +69,7 @@ public class EditController
 				
 				model.addAttribute("texts", texts);
 				model.addAttribute("currentpage", currentpage);
+				model.addAttribute("domain",domain);
 				
 				return "edit";
 		}
@@ -89,35 +90,48 @@ public class EditController
 						@RequestParam(defaultValue="1")Group group,
 						@RequestParam(defaultValue="0")int currentpage)
 		{		
-			
 				Equivalence equivalence = databaseRequestService.getNewEquivalence(group);
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
 				for (Group groop:groups)
 				{
-						String name = groop.getName();
+						//String name = groop.getName();
 						String text = params.get(groop.getName());
 						databaseRequestService.addText(groop, new Text(text),equivalence);
 				}
+				
+				Long nextEquivalenceId = domain.getNextEquivalenceId();
+				domain.incrementNextEquivalenceId();
+				equivalence.setUserId(nextEquivalenceId);
+				
+				domainHandler.saveEquivalence(equivalence);
+				domainHandler.saveDomain(domain);
 			
-				return "redirect:/?currentpage="+currentpage;
+				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}
 
 		@RequestMapping(value="/update",method=RequestMethod.POST)
 		public String update(@RequestParam Map<String, String> params)
 		{		
+				System.out.println("EditController.update :");
+			
 				for (String key : params.keySet())
 				{
-						//System.out.println("key : "+key+", value : "+params.get(key) );
-						databaseRequestService.updateText(Long.parseLong(key), params.get(key));
+						System.out.println("key : "+key+", value : "+params.get(key) );
+					
+						if ( !(key.equals("domain") || key.equals("currentpage")))
+							databaseRequestService.updateText(Long.parseLong(key), params.get(key));
 				}
 				
+				
+				
 				String currentpage = params.get("currentpage");
-		
-				if (currentpage == null )
-					return "redirect:/";
+				String domain = params.get("domain");
+				
+				if (currentpage != null && domain != null)
+					return "redirect:/?domain="+domain+"&currentpage="+currentpage;
 				else
-					return "redirect:/?currentpage="+currentpage;
+					return "redirect:/";
 		}
 		
 		

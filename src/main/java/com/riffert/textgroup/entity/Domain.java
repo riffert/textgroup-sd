@@ -25,6 +25,7 @@ public class Domain implements Serializable
 		{
 			this();
 			setName(name);
+			setNextEquivalenceId((long)1);
 		}
 		
 		private Domain()
@@ -32,6 +33,27 @@ public class Domain implements Serializable
 			super();
 		}
 	
+		/*________________________________________________________________________*/
+		
+		private Long nextEquivalenceId;
+		
+		public Long getNextEquivalenceId() {
+			return nextEquivalenceId;
+		}
+
+		public void setNextEquivalenceId(Long nextEquivalenceId) {
+			this.nextEquivalenceId = nextEquivalenceId;
+		}
+		
+		/*________________________________________________________________________*/
+		
+		public void incrementNextEquivalenceId()
+		{
+			nextEquivalenceId++;
+			
+		}
+		
+		
 		/*________________________________________________________________________*/
 		
 		@Id
@@ -130,6 +152,7 @@ public class Domain implements Serializable
 			equivalences.add(equivalence);
 			equivalence.setDomain(this);
 		}
+
 
 		
 		/*________________________________________________________________________*/

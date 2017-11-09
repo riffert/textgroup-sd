@@ -27,7 +27,7 @@ public class DatabaseRequestService
 		private DomainHandler domainHandler;
 		
 		@Autowired
-		private LanguageRepository languageRepository; // TODO uniquement des handler ici
+		private LanguageRepository languageRepository; // TODO only handler here
 		
 		public void updateText(Long id,String text)
 		{
@@ -86,7 +86,7 @@ public class DatabaseRequestService
 		}
 
 	
-		// TODO java 8 compliant
+
 		public List<Group> getGroups(Domain domain, Group group)
 		{
 				if ( domain == null) return null;

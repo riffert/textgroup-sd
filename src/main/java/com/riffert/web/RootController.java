@@ -35,11 +35,25 @@ public class RootController
 				@RequestParam(defaultValue="0")String flag)
 		{
 			
-				//System.out.print("domain : "+domain.getId()+", group :"+group.getId());
+				//System.out.println("[info] domain : "+domain.getId()+", group :"+group.getId());
 			
 				boolean bFlag = true;
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
+				
+				if (domain != null )
+				{
+						List<Group> groups = domain.getGroups();
+						
+						if (groups.size() > 0 && group.getId() == 1 )
+						{
+								group = groups.get(0);
+								System.out.println("[info] group : "+group.getId());
+						}
+				}
+					
+				
+				
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
@@ -72,7 +86,8 @@ public class RootController
 				{
 						Equivalence equivalence = text.getEquivalence();
 						
-						TextNode textnode = new TextNode(text.getValue(), equivalence.getId()+"");
+						TextNode textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"");
+						//TextNode textnode = new TextNode(text.getValue(), equivalence.getUserId()+"");
 						Node node = treeview.addNode(textnode);
 						
 						List<Text> texts = equivalence.getTexts();
@@ -82,8 +97,9 @@ public class RootController
 								String value = txt.getValue();
 								equivalence = txt.getEquivalence();
 								
-								if (txt.getGroup() != group) {
-									node.addChild(new TextNode(value, equivalence.getId()+""));
+								if (txt.getGroup() != group)
+								{
+									node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+""));
 								}
 						}
 				}

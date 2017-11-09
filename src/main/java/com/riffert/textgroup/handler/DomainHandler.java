@@ -52,6 +52,16 @@ public class DomainHandler
 				textRepository = ctx.getBean(TextRepository.class);
 		}
 		
+		public void saveDomain(Domain domain)
+		{
+				domainRepository.saveAndFlush(domain);
+		}
+		
+		public void saveEquivalence(Equivalence equivalence)
+		{
+				equivalenceRepository.saveAndFlush(equivalence);
+		}
+		
 		public Equivalence createEquivalence(Domain domain)
 		{
 				Equivalence equivalence = new Equivalence();
@@ -67,7 +77,7 @@ public class DomainHandler
 		public Text addText(Text text,Equivalence equivalence,Group group)
 		{
 				textRepository.save(text);
-				
+
 				equivalence.add(text);
 				group.add(text);
 				
@@ -115,16 +125,12 @@ public class DomainHandler
 				return domainRepository.findOne((long)domain.getId());
 		}
 		
-		// TODO java 8 compliant
+
 		public Map<String, List<Text>> getMap(long n)
 		{
 				Map<String, List<Text>> hm = new HashMap<String, List<Text>>();
 				
-//				Domain domain = new Domain("default");
-//				domain.setId((long) 1);
-				
-				Domain domain = domainRepository.findOne((long) 1);
-				
+				Domain domain = domainRepository.findOne((long) n);
 				
 				List<Group> groups = domain.getGroups();
 				int qty = groups.size();

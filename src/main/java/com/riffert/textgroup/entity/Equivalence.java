@@ -38,6 +38,18 @@ public class Equivalence
 		
 		/*________________________________________________________________________*/
 		
+		private Long userId;
+		
+		public Long getUserId() {
+			return userId;
+		}
+
+		public void setUserId(Long userId) {
+			this.userId = userId;
+		}
+		
+		/*________________________________________________________________________*/
+		
 		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="equivalence")
 		private List<Text> texts = new ArrayList<Text>();
 

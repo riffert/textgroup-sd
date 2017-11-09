@@ -4,33 +4,35 @@ import java.util.List;
 
 public class TextNode extends Node
 {
-		// TODO put in properties
+		// TODO setting from properties
 		private static final String BG_COLOR = "#F9F9F9";
 		
 		private char c;
 		
 		private String text;
 		private String equivalence;
+		private String userId;
 		private String bgColor;
 		
 		public TextNode()
 		{
-			this("","10", BG_COLOR);
+			this("","10", "", BG_COLOR);
 		}
 
-		public TextNode(String text,String equivalence, String bgColor)
+		public TextNode(String text,String equivalence, String userId, String bgColor)
 		{
 			super();
 			
 			this.setC(',');
 			this.setText(text);
 			this.setEquivalence(equivalence);
+			this.setUserId(userId);
 			this.setBgColor(bgColor);
 		}
 	
-		public TextNode(String text, String equivalence)
+		public TextNode(String text, String equivalence, String userId)
 		{
-			this(text,equivalence, BG_COLOR);
+			this(text,equivalence, userId, BG_COLOR);
 		}
 		
 		public TextNode getNode(int index)
@@ -40,7 +42,7 @@ public class TextNode extends Node
 		
 		public TextNode addChild(String text)
 		{
-			TextNode node = new TextNode(text,"10", "");
+			TextNode node = new TextNode(text,"10", "", "");
 			return (TextNode)addChild(node);
 		}
 		
@@ -90,6 +92,14 @@ public class TextNode extends Node
 		
 		public String getBgColor() {
 			return bgColor;
+		}
+
+		public String getUserId() {
+			return userId;
+		}
+
+		public void setUserId(String userId) {
+			this.userId = userId;
 		}
 		
 }
