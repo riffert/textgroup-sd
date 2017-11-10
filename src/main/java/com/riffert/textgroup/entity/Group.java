@@ -114,18 +114,31 @@ public class Group implements Serializable
 			return texts;
 		}
 		
+	
 		public List<Text> getTextsFrom1()
 		{
+			long nextEquivalenceId = domain.getNextEquivalenceId();
+			
 			List<Text> txts = new ArrayList<Text>();
-			txts.add(new Text(""));
+			
+			if (nextEquivalenceId > 1)
+			{
+					for (long i=0;i<nextEquivalenceId;i++)
+					{
+						txts.add(new Text(""));
+					}
+			}
+			
 			
 			for (Text txt:texts)
 			{
-				txts.add(txt);
+				int n = txt.getEquivalence().getUserId().intValue();
+				txts.set(n, txt); // TODO (long)
 			}
 			
 			return txts;
 		}		
+		
 
 		public void setTexts(List<Text> texts) {
 			this.texts = texts;
