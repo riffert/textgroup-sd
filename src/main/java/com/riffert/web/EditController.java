@@ -1,6 +1,5 @@
 package com.riffert.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class EditController
 		private DatabaseRequestService databaseRequestService;
 		
 		@Autowired
-		private DatabaseHandler domainHandler;
+		private DatabaseHandler databaseHandler;
 
 		@RequestMapping(value="/add")
 		public String add(Model model,
@@ -50,8 +49,7 @@ public class EditController
 		{
 				if (equivalenceId != 0)
 				{
-					System.out.println("equivalence different de 0 : "+equivalenceId);
-					domainHandler.removeEquivalence(equivalenceId);
+					databaseRequestService.removeEquivalence(equivalenceId);
 				}
 				
 				return "/";
@@ -75,7 +73,7 @@ public class EditController
 							text.setDomain(domain);
 							grp.add(text);
 							
-							domainHandler.addText(text, equivalence, grp);
+							databaseHandler.addText(text, equivalence, grp);
 						}
 				}
 				
@@ -119,8 +117,8 @@ public class EditController
 				domain.incrementNextEquivalenceId();
 				equivalence.setUserId(nextEquivalenceId);
 				
-				domainHandler.saveEquivalence(equivalence);
-				domainHandler.saveDomain(domain);
+				databaseHandler.saveEquivalence(equivalence);
+				databaseHandler.saveDomain(domain);
 			
 				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}

@@ -4,17 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.riffert.textgroup.dao.LanguageRepository;
 import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Language;
 import com.riffert.textgroup.entity.Text;
 import com.riffert.textgroup.handler.DatabaseHandler;
-import com.riffert.textgroup.handler.TextHandler;
 
 
 @Service
@@ -23,7 +20,12 @@ public class DatabaseRequestService
 		
 		@Autowired
 		private DatabaseHandler databaseHandler;
+		
 
+		public void removeEquivalence(Long equivalenceId)
+		{
+				databaseHandler.removeEquivalence(equivalenceId);	
+		}
 		
 		public List<Equivalence> getHoles(Domain domain)
 		{
@@ -146,20 +148,16 @@ public class DatabaseRequestService
 		
 		public Page<Language> getLanguages(int currentpage,int pagesize)
 		{
-			
 				return databaseHandler.getLanguages(currentpage,pagesize);
-				//return languageRepository.findAll(new PageRequest(currentpage, pagesize));
 		}
 		
 		public Page<Language> getLanguagesByEnglishKeyword(String keyword,int currentpage,int pagesize)
 		{
 				return databaseHandler.getLanguagesByEnglishKeyword(keyword,currentpage,pagesize);
-				//return languageRepository.searchByEnglishKeyword("%"+keyword+"%",new PageRequest(currentpage, pagesize));
 		}
 		
 		public void addGroup(Domain domain,String groupName, String userGroupName)
 		{
-				
 				databaseHandler.addGroup(domain, new Group(groupName,userGroupName));
 		}
 		

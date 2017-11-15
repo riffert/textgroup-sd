@@ -43,6 +43,8 @@ public class DatabaseHandler
 		@Autowired
 		private LanguageRepository languageRepository;
 
+		
+		
 		public DatabaseHandler() {}
 		
 		public Page<Language> getLanguages(int currentpage,int pagesize)
