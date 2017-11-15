@@ -34,9 +34,6 @@ public class RootController
 				@RequestParam(defaultValue="1")Group group,
 				@RequestParam(defaultValue="0")String flag)
 		{
-			
-				//System.out.println("[info] domain : "+domain.getId()+", group :"+group.getId());
-			
 				boolean bFlag = true;
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
@@ -48,12 +45,8 @@ public class RootController
 						if (groups.size() > 0 && group.getId() == 1 )
 						{
 								group = groups.get(0);
-								System.out.println("[info] group : "+group.getId());
 						}
 				}
-					
-				
-				
 				
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
@@ -74,6 +67,11 @@ public class RootController
 				
 				int pagesCount = pageTexts.getTotalPages();
 				
+				/*
+				boolean bLastPage = pageTexts.isLast();
+				int numberOfElements = pageTexts.getNumberOfElements();
+				*/
+				
 				navs = new Nav[pagesCount];
 				
 				for (int i=0;i<pagesCount;i++){
@@ -82,24 +80,34 @@ public class RootController
 				
 				Treeview treeview = new Treeview();
 				
+				//int counter = 0;
+
 				for (Text text:pageTexts)
 				{
 						Equivalence equivalence = text.getEquivalence();
 						
-						TextNode textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"");
-						//TextNode textnode = new TextNode(text.getValue(), equivalence.getUserId()+"");
+						TextNode textnode;
+						
+						//if (bLastPage)
+							//System.out.println("** is last **");
+						
+						//if ( bLastPage && (++counter==numberOfElements))
+							//textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"","delete");
+						//else
+							textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"", "");
+							
 						Node node = treeview.addNode(textnode);
 						
 						List<Text> texts = equivalence.getTexts();
 						
 						for (Text txt:texts)
-						{
+						{	
 								String value = txt.getValue();
 								equivalence = txt.getEquivalence();
 								
 								if (txt.getGroup() != group)
 								{
-									node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+""));
+									node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+"", ""));
 								}
 						}
 				}

@@ -155,6 +155,10 @@ public class Domain implements Serializable
 			equivalence.setDomain(this);
 		}
 
+		public void remove(Equivalence equivalence)
+		{
+			equivalences.remove(equivalence);
+		}
 
 		
 		/*________________________________________________________________________*/

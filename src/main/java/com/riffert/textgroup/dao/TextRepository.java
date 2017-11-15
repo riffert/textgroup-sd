@@ -23,6 +23,11 @@ public interface TextRepository extends JpaRepository<Text, Long>
 {
 
 		@Modifying
+	    @Transactional
+	    @Query("delete from Text t where t.equivalence = :equivalenceId")
+	    void remove(@Param("equivalenceId") Equivalence equivalenceId);
+	
+		@Modifying
 	    @Query("UPDATE Text t SET t.value = :text WHERE t.id = :id")
 	    int updateText(@Param("id") Long id, @Param("text") String text);
 		
@@ -37,7 +42,8 @@ public interface TextRepository extends JpaRepository<Text, Long>
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "d") Domain domain,Pageable p);
 
 		// searching in same group
-		@Query("select t from Text t where t.value like :v and t.group = :g")
+		// @Query("select t from Text t where t.value like :v and t.group = :g")
+		@Query("select t from Text t where t.value like :v and t.group = :g order by t.equivalence.userId")
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "g") Group group,Pageable p);
 		
 		@Query("select t from Text t where t.equivalence = :e ")

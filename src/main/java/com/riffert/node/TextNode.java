@@ -13,13 +13,14 @@ public class TextNode extends Node
 		private String equivalence;
 		private String userId;
 		private String bgColor;
+		private String deleteLink;
 		
 		public TextNode()
 		{
-			this("","10", "", BG_COLOR);
+			this("","10", "", "", BG_COLOR);
 		}
 
-		public TextNode(String text,String equivalence, String userId, String bgColor)
+		public TextNode(String text,String equivalence, String userId, String deleteLink, String bgColor)
 		{
 			super();
 			
@@ -27,12 +28,13 @@ public class TextNode extends Node
 			this.setText(text);
 			this.setEquivalence(equivalence);
 			this.setUserId(userId);
+			this.setDeleteLink(deleteLink);
 			this.setBgColor(bgColor);
 		}
 	
-		public TextNode(String text, String equivalence, String userId)
+		public TextNode(String text, String equivalence, String userId, String deleteLink)
 		{
-			this(text,equivalence, userId, BG_COLOR);
+			this(text,equivalence, userId, deleteLink, BG_COLOR);
 		}
 		
 		public TextNode getNode(int index)
@@ -42,7 +44,7 @@ public class TextNode extends Node
 		
 		public TextNode addChild(String text)
 		{
-			TextNode node = new TextNode(text,"10", "", "");
+			TextNode node = new TextNode(text,"10", "", "", "");
 			return (TextNode)addChild(node);
 		}
 		
@@ -100,6 +102,14 @@ public class TextNode extends Node
 
 		public void setUserId(String userId) {
 			this.userId = userId;
+		}
+
+		public String getDeleteLink() {
+			return deleteLink;
+		}
+
+		public void setDeleteLink(String deleteLink) {
+			this.deleteLink = deleteLink;
 		}
 		
 }

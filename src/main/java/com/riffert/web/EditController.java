@@ -15,7 +15,7 @@ import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Text;
-import com.riffert.textgroup.handler.DomainHandler;
+import com.riffert.textgroup.handler.DatabaseHandler;
 import com.riffert.textgroup.service.DatabaseRequestService;
 
 @Controller
@@ -25,7 +25,7 @@ public class EditController
 		private DatabaseRequestService databaseRequestService;
 		
 		@Autowired
-		private DomainHandler domainHandler;
+		private DatabaseHandler domainHandler;
 
 		@RequestMapping(value="/add")
 		public String add(Model model,
@@ -41,6 +41,20 @@ public class EditController
 				model.addAttribute("groups", groups);
 				
 				return "add";
+		}
+
+		
+		@RequestMapping(value="/remove")
+		public String delete(Model model,
+				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId)
+		{
+				if (equivalenceId != 0)
+				{
+					System.out.println("equivalence different de 0 : "+equivalenceId);
+					domainHandler.removeEquivalence(equivalenceId);
+				}
+				
+				return "/";
 		}
 		
 		@RequestMapping(value="/edit")
@@ -69,6 +83,7 @@ public class EditController
 				
 				model.addAttribute("texts", texts);
 				model.addAttribute("currentpage", currentpage);
+				model.addAttribute("equivalence", equivalence);
 				model.addAttribute("domain",domain);
 				
 				return "edit";

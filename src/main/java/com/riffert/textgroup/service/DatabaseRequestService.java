@@ -13,52 +13,58 @@ import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Language;
 import com.riffert.textgroup.entity.Text;
-import com.riffert.textgroup.handler.DomainHandler;
+import com.riffert.textgroup.handler.DatabaseHandler;
 import com.riffert.textgroup.handler.TextHandler;
 
 
 @Service
 public class DatabaseRequestService
 {
-		@Autowired
-		private TextHandler textHandler;
 		
 		@Autowired
-		private DomainHandler domainHandler;
+		private DatabaseHandler databaseHandler;
+
 		
-		@Autowired
-		private LanguageRepository languageRepository; // TODO only handler here
+		public List<Equivalence> getHoles(Domain domain)
+		{
+			return databaseHandler.getHoles(domain);
+		}				
+		
+		public List<Long> getUserIdHoles(Domain domain)
+		{
+			return databaseHandler.getUserIdHoles(domain);
+		}
 		
 		public void updateText(Long id,String text)
 		{
-				domainHandler.updateText(id, text);
+				databaseHandler.updateText(id, text);
 		}
 		
 		public void deleteText(Text text)
 		{
-				textHandler.deleteText(text);
+				databaseHandler.deleteText(text);
 		}
 		
 		public void createDomain(String domainName)
 		{
-				domainHandler.createDomain(new Domain(domainName));
+				databaseHandler.createDomain(new Domain(domainName));
 		}
 
 		public List<Equivalence> getList(Equivalence equivalence)
 		{
-				List<Equivalence> listTexts = textHandler.getTextsEquivalence(equivalence);
+				List<Equivalence> listTexts = databaseHandler.getTextsEquivalence(equivalence);
 				return listTexts;
 		}
 		
 		public Page<Text> getPage(Group group,String keyword,int currentpage,int pagesize)
 		{
-				Page<Text> pageTexts = textHandler.search(keyword, group,currentpage, pagesize);
+				Page<Text> pageTexts = databaseHandler.search(keyword, group,currentpage, pagesize);
 				return pageTexts;
 		}
 		
 		public List<Domain> getDomains(Domain domain)
 		{
-				List<Domain> domains = domainHandler.getDomains();
+				List<Domain> domains = databaseHandler.getDomains();
 				
 				if ( domains != null )
 				{
@@ -91,7 +97,7 @@ public class DatabaseRequestService
 		{
 				if ( domain == null) return null;
 			
-				List<Group> groups = domainHandler.getDomain(domain).getGroups();
+				List<Group> groups = databaseHandler.getDomain(domain).getGroups();
 
 				if ( groups != null )
 				{
@@ -121,37 +127,40 @@ public class DatabaseRequestService
 		
 		public Equivalence getNewEquivalence(Group group)
 		{
-				return domainHandler.createEquivalence(group.getDomain());
+				return databaseHandler.createEquivalence(group.getDomain());
 		}
 		
 		public boolean addText(Group group,Text text)
 		{
-				Equivalence equivalence = domainHandler.createEquivalence(group.getDomain());
-				domainHandler.addText(text, equivalence, group);
+				Equivalence equivalence = databaseHandler.createEquivalence(group.getDomain());
+				databaseHandler.addText(text, equivalence, group);
 				return true;
 		}
 
 		public boolean addText(Group group,Text text,Equivalence equivalence)
 		{
-				domainHandler.addText(text, equivalence, group);
+				databaseHandler.addText(text, equivalence, group);
 				return true;
 		}
 
 		
 		public Page<Language> getLanguages(int currentpage,int pagesize)
 		{
-				return languageRepository.findAll(new PageRequest(currentpage, pagesize));
+			
+				return databaseHandler.getLanguages(currentpage,pagesize);
+				//return languageRepository.findAll(new PageRequest(currentpage, pagesize));
 		}
 		
 		public Page<Language> getLanguagesByEnglishKeyword(String keyword,int currentpage,int pagesize)
 		{
-				return languageRepository.searchByEnglishKeyword("%"+keyword+"%",new PageRequest(currentpage, pagesize));
+				return databaseHandler.getLanguagesByEnglishKeyword(keyword,currentpage,pagesize);
+				//return languageRepository.searchByEnglishKeyword("%"+keyword+"%",new PageRequest(currentpage, pagesize));
 		}
 		
 		public void addGroup(Domain domain,String groupName, String userGroupName)
 		{
 				
-				domainHandler.addGroup(domain, new Group(groupName,userGroupName));
+				databaseHandler.addGroup(domain, new Group(groupName,userGroupName));
 		}
 		
 }
