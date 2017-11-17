@@ -34,7 +34,7 @@
 					{{/domains}}
 				</select>
 				<input type="button" value="+" onclick="addDomain();">
-				<input type="button" value="-" onclick="RemoveComboItem();">
+				<input type="button" value="-" onclick="removeDomain();">
 
 				<div class="spacer" style="display:inline;">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,7 +47,7 @@
 					{{/groups}}
 				</select>
 				<input type="button" value="+" onclick="addGroup();" title="add language">
-				<input type="button" value="-" onclick="RemoveGroup();">
+				<input type="button" value="-" onclick="removeGroup();">
 				
 				<div class="spacer" style="display:inline;">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -65,6 +65,12 @@
 				</div>					
 				
 				<a href="add?domain={{domain.id}}&group={{group.id}}&currentpage={{currentpage}}">Add Texts</a>
+
+				<div class="spacer" style="display:inline;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>					
+				
+				<a href="options?domain={{domain.id}}">Options</a>
 				
 		</div>
 

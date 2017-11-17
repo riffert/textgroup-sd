@@ -27,9 +27,19 @@
 						<input type="hidden" name="domain" value="{{domain.id}}">
 						<input type="hidden" name="group" value="{{group.id}}">
 						<input type="hidden" name="currentpage" value="{{currentpage}}">
+						<input type="hidden" name="userId" value="{{userId}}">
 	
 						<table>
-				
+										<tr>
+												<td>
+														id : {{userId}}
+												</td>
+										</tr>
+										<tr>
+												<td colspan="2">
+													&nbsp;
+												</td>			
+										</tr>
 								{{#groups}}
 										<tr>
 												<td>
@@ -48,20 +58,15 @@
 										</tr>
 								{{/groups}}
 												
-								<tr>
-										<td>
-											&nbsp;
-										</td>			
-								
-										<td>
-												<button type="submit">Save</button>
-												<a href="/?domain={{domain.id}}"><button>cancel</button></a>
-										</td>			
-								</tr>
+
 			
 						</table>
+						
+						<button type="submit">Save</button>
 				
 				</form>
+				<a href="/?domain={{domain.id}}"><button>cancel</button></a>
+				
 				
 			</div>
 	</body>

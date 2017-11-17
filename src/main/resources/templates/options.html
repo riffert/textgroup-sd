@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Translation user interface</title>
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-3.3.4.css">
+		
+		<script type="text/javascript">
+
+			function insert()
+			{
+				var thelist=document.getElementById('freeIds');
+				var idx = thelist.selectedIndex;
+				var value = thelist.options[idx].value;
+				window.location = "add?userId="+value+"&domain={{domain.id}}&group={{group.id}}&currentpage={{currentpage}}";
+			}
+			
+		</script>
+		
+	</head>
+	
+	<body>
+	
+			<div class="container spacer" style="display:inline;" ></div>
+			
+			<div class="container spacer" >
+				options
+			</div>
+		
+			<div class="container spacer" >
+			
+			
+					<label>Free id's :</label>
+					<select class="combobox" style="width: 150px;" id="freeIds">
+						{{#freeIds}}
+							<option value="{{value}}" {{{selected}}}>{{value}}</option>
+						{{/freeIds}}
+					</select>
+					<input type="button" value="insert" onclick="insert();">
+			
+			
+					<table>
+
+							<tr>
+									<td colspan="2">
+										&nbsp;
+									</td>			
+							</tr>	
+							<tr>
+									<td>
+										<a href="/?domain={{domain.id}}"><button>cancel</button></a>									
+									</td>
+							</tr>
+					</table>
+			</div>
+
+	</body>
+</html>
+			

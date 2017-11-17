@@ -52,7 +52,6 @@ public class Domain implements Serializable
 		public void incrementNextEquivalenceId()
 		{
 			nextEquivalenceId++;
-			
 		}
 		
 		
@@ -116,7 +115,7 @@ public class Domain implements Serializable
 			group.setDomain(this);
 		}
 		
-		// TODO replace with java 8 version
+
 		public Group getGroupByName(String groupName)
 		{
 			System.out.println("searched groupName : "+groupName);
@@ -128,7 +127,7 @@ public class Domain implements Serializable
 			return null;
 		}
 		
-		// java 8 version :
+		// java 8 :
 		public Group getGroupByName2(String groupName)
 		{
 			System.out.println("searched groupName Java8 : "+groupName);

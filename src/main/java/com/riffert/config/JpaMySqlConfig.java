@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"com.riffert.textgroup"})
+@EnableJpaRepositories(basePackages={"com.riffert.textgroup"}) // 'No qualifying bean of type' error if not present
 @EnableTransactionManagement
 public class JpaMySqlConfig
 {
@@ -27,7 +27,7 @@ public class JpaMySqlConfig
 		{
 			LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 			emf.setDataSource(getDataSource());
-			emf.setPackagesToScan("com.riffert.textgroup.dao","com.riffert.textgroup.entity");
+			emf.setPackagesToScan("com.riffert.textgroup.dao","com.riffert.textgroup.entity"); // 'No persistence units parsed from {classpath*:META-INF/persistence.xml}' error if not present
 			
 			JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 			emf.setJpaVendorAdapter(adapter);
@@ -51,6 +51,15 @@ public class JpaMySqlConfig
 			return new PersistenceExceptionTranslationPostProcessor();
 		}
 	
+		// self added for testing purpose (no changes behavior was displayed in the logs) 
+/*		@Bean(name="postProcessor")
+		public PersistenceExceptionTranslationPostProcessor postProcessor()
+		{
+			System.out.println("cp2"); // displayed at start (because spring container init)
+			return new PersistenceExceptionTranslationPostProcessor();
+		}
+*/		
+
 		public DataSource getDataSource()
 		{
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();

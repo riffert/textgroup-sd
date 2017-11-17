@@ -28,6 +28,16 @@
 						<input type="hidden" name="currentpage" value="{{currentpage}}">
 						
 						<table>
+										<tr>
+												<td>
+														id : {{equivalence.userId}}
+												</td>
+										</tr>
+										<tr>
+												<td colspan="2">
+													&nbsp;
+												</td>			
+										</tr>										
 				
 								{{#texts}}
 										<tr>
@@ -54,6 +64,7 @@
 					</form>
 											
 					<a href="/?domain={{domain.id}}"><button>cancel</button></a>
+					<a href="/remove?equivalenceId={{equivalence.id}}"><button>delete</button></a>
 
 			</div>
 	</body>

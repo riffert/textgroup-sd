@@ -123,7 +123,7 @@ public class Group implements Serializable
 			
 			if (nextEquivalenceId > 1)
 			{
-					for (long i=0;i<nextEquivalenceId;i++)
+					for (long i=0;i<=nextEquivalenceId;i++)
 					{
 						txts.add(new Text(""));
 					}

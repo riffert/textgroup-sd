@@ -67,10 +67,6 @@ public class RootController
 				
 				int pagesCount = pageTexts.getTotalPages();
 				
-				/*
-				boolean bLastPage = pageTexts.isLast();
-				int numberOfElements = pageTexts.getNumberOfElements();
-				*/
 				
 				navs = new Nav[pagesCount];
 				
@@ -80,7 +76,6 @@ public class RootController
 				
 				Treeview treeview = new Treeview();
 				
-				//int counter = 0;
 
 				for (Text text:pageTexts)
 				{
@@ -88,13 +83,7 @@ public class RootController
 						
 						TextNode textnode;
 						
-						//if (bLastPage)
-							//System.out.println("** is last **");
-						
-						//if ( bLastPage && (++counter==numberOfElements))
-							//textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"","delete");
-						//else
-							textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"", "");
+						textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"", "");
 							
 						Node node = treeview.addNode(textnode);
 						
@@ -102,11 +91,12 @@ public class RootController
 						
 						for (Text txt:texts)
 						{	
-								String value = txt.getValue();
-								equivalence = txt.getEquivalence();
 								
 								if (txt.getGroup() != group)
 								{
+									String value = txt.getValue();
+									equivalence = txt.getEquivalence();
+
 									node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+"", ""));
 								}
 						}
@@ -148,14 +138,6 @@ public class RootController
 		}
 
 
-
-
-		@RequestMapping(value="/delete")
-		public String remove(@RequestParam(defaultValue="0")Text text)
-		{
-				databaseRequestService.deleteText(text);
-				return "redirect:/";
-		}
 
 		
 }

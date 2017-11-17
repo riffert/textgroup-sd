@@ -30,7 +30,7 @@ public class JpaHsqlConfig implements DisposableBean {
             = new LocalContainerEntityManagerFactoryBean();
  
         lcemfb.setDataSource(this.hsqlInMemory());
-        
+        //lcemfb.setPackagesToScan(new String[] {"com.jverstry"});
         lcemfb.setPackagesToScan("com.riffert.textgroup.dao","com.riffert.textgroup.entity");
  
         lcemfb.setPersistenceUnitName("MyPU");
@@ -48,18 +48,8 @@ public class JpaHsqlConfig implements DisposableBean {
         return lcemfb;
  
     }    
-    
-    
-    /* to include in pom.xml :
-     * <dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.3.4</version>
-		</dependency>
-
-     */
  
-    //@Bean(name="hsqlInMemory")  Uncomment if you want to use hsql database
+    @Bean(name="hsqlInMemory")
     public EmbeddedDatabase hsqlInMemory() {
  
         if ( this.ed == null ) {

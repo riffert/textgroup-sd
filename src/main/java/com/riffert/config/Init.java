@@ -10,7 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 
 import com.riffert.textgroup.entity.Text;
-import com.riffert.textgroup.handler.DomainHandler;
+import com.riffert.textgroup.handler.DatabaseHandler;
 
 
 @ComponentScan(value="com.riffert.textgroup.entity,com.riffert.textgroup.dao,com.riffert.textgroup.handler")
@@ -23,7 +23,7 @@ public class Init implements ServletContextListener
 				System.out.println("Init::contextInitialized() [start running]");
 				
 				AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(JpaMySqlConfig.class);
-				DomainHandler domainHandler = new DomainHandler(ctx);
+				DatabaseHandler domainHandler = new DatabaseHandler(ctx);
 				hm = domainHandler.getMap(1); 
 				
 				System.out.println("size of map is "+hm.size());

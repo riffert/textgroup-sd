@@ -14,7 +14,6 @@ import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
 import com.riffert.textgroup.entity.Text;
-import com.riffert.textgroup.handler.DatabaseHandler;
 import com.riffert.textgroup.service.DatabaseRequestService;
 
 @Controller
@@ -23,17 +22,20 @@ public class EditController
 		@Autowired
 		private DatabaseRequestService databaseRequestService;
 		
-		@Autowired
-		private DatabaseHandler databaseHandler;
-
 		@RequestMapping(value="/add")
 		public String add(Model model,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="1")Group group,
-				@RequestParam(defaultValue="0")int currentpage)
+				@RequestParam(defaultValue="0")int currentpage,
+				@RequestParam(defaultValue="0")Long userId)
 		{
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
+				if (userId == 0)
+					userId = domain.getNextEquivalenceId();
+					
+				
+				model.addAttribute("userId", userId);
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
 				model.addAttribute("currentpage", currentpage);
@@ -45,14 +47,15 @@ public class EditController
 		
 		@RequestMapping(value="/remove")
 		public String delete(Model model,
-				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId)
+				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId,
+				@RequestParam(defaultValue="1")Domain domain)
 		{
 				if (equivalenceId != 0)
 				{
-					databaseRequestService.removeEquivalence(equivalenceId);
+						databaseRequestService.removeEquivalence(equivalenceId);
 				}
 				
-				return "/";
+				return "/?domain="+domain.getId();
 		}
 		
 		@RequestMapping(value="/edit")
@@ -73,7 +76,7 @@ public class EditController
 							text.setDomain(domain);
 							grp.add(text);
 							
-							databaseHandler.addText(text, equivalence, grp);
+							databaseRequestService.addText(text, equivalence, grp);
 						}
 				}
 				
@@ -101,24 +104,34 @@ public class EditController
 		public String save(Model model,@RequestParam Map<String, String> params,
 						@RequestParam(defaultValue="1")Domain domain,
 						@RequestParam(defaultValue="1")Group group,
-						@RequestParam(defaultValue="0")int currentpage)
+						@RequestParam(defaultValue="0")int currentpage,
+						@RequestParam(defaultValue="0")String userId)
 		{		
 				Equivalence equivalence = databaseRequestService.getNewEquivalence(group);
 				List<Group> groups = databaseRequestService.getGroups(domain,group);
 				
 				for (Group groop:groups)
 				{
-						//String name = groop.getName();
 						String text = params.get(groop.getName());
-						databaseRequestService.addText(groop, new Text(text),equivalence);
+						databaseRequestService.addText(new Text(text), equivalence,groop);
 				}
 				
-				Long nextEquivalenceId = domain.getNextEquivalenceId();
-				domain.incrementNextEquivalenceId();
-				equivalence.setUserId(nextEquivalenceId);
+				Long nUserId;
 				
-				databaseHandler.saveEquivalence(equivalence);
-				databaseHandler.saveDomain(domain);
+				if (userId.equals("0"))
+				{
+					nUserId = domain.getNextEquivalenceId();
+					domain.incrementNextEquivalenceId();
+				}
+				else
+				{
+					System.out.println("** userId :"+userId);
+					nUserId = Long.parseLong(userId);
+				}
+				
+				equivalence.setUserId(nUserId);
+				
+				databaseRequestService.save(equivalence, domain);
 			
 				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}
@@ -126,17 +139,12 @@ public class EditController
 		@RequestMapping(value="/update",method=RequestMethod.POST)
 		public String update(@RequestParam Map<String, String> params)
 		{		
-				System.out.println("EditController.update :");
-			
 				for (String key : params.keySet())
 				{
-						System.out.println("key : "+key+", value : "+params.get(key) );
-					
+						//System.out.println("key : "+key+", value : "+params.get(key) );
 						if ( !(key.equals("domain") || key.equals("currentpage")))
 							databaseRequestService.updateText(Long.parseLong(key), params.get(key));
 				}
-				
-				
 				
 				String currentpage = params.get("currentpage");
 				String domain = params.get("domain");
@@ -146,28 +154,5 @@ public class EditController
 				else
 					return "redirect:/";
 		}
-		
-		
-		
-//		@RequestMapping(value="/update",method=RequestMethod.POST)
-//		public String update(@RequestParam Map<String, String> params)
-//		{		
-//				System.out.println("[update]");
-//				
-//				for (String key : params.keySet()) {
-//				    System.out.println("key : "+key+", value : "+params.get(key) );
-//				}
-//				
-//				
-//				return "/";
-//		}		
-		
-		/*
-		@RequestMapping("/listItems")
-		public @ResponseBody GridModel getUsersForGrid(@RequestParam Map<String, String> params) {
-		    params.get("parametername");
-		    // ...
-		}
-		*/		
 
 }

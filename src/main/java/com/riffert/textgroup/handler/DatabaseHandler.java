@@ -77,14 +77,14 @@ public class DatabaseHandler
 				return textRepository.search("%"+keyword+"%", group,new PageRequest(currentpage, pagesize));
 		}
 		
-		public List<Equivalence> getHoles(Domain domain)
+		public List<Equivalence> getEquivalences(Domain domain)
 		{
-			return equivalenceRepository.getHoles(domain);
+			return equivalenceRepository.getEquivalences(domain);
 		}				
 		
-		public List<Long> getUserIdHoles(Domain domain)
+		public List<Long> getUserIds(Domain domain)
 		{
-			return equivalenceRepository.getUserIdHoles(domain);
+			return equivalenceRepository.getUserIds(domain);
 		}
 
 		public Group getGroupByName(Domain domain, String groupname)

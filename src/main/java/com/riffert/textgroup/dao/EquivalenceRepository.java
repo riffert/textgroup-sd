@@ -29,8 +29,8 @@ public interface EquivalenceRepository extends JpaRepository<Equivalence, Long>
     void remove(@Param("equivalenceId") Long equivalenceId);
 	
 	@Query("select e from Equivalence e where e.domain = :d order by e.userId")
-	List<Equivalence> getHoles(@Param(value = "d") Domain domain);
+	List<Equivalence> getEquivalences(@Param(value = "d") Domain domain);
 	
 	@Query("select e.userId from Equivalence e where e.domain = :d order by e.userId")
-	List<Long> getUserIdHoles(@Param(value = "d") Domain domain);
+	List<Long> getUserIds(@Param(value = "d") Domain domain);
 }

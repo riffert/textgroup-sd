@@ -21,20 +21,26 @@ public class DatabaseRequestService
 		@Autowired
 		private DatabaseHandler databaseHandler;
 		
+		
+		public void save(Equivalence equivalence, Domain domain)
+		{
+				databaseHandler.saveEquivalence(equivalence);
+				databaseHandler.saveDomain(domain);
+		}
 
 		public void removeEquivalence(Long equivalenceId)
 		{
 				databaseHandler.removeEquivalence(equivalenceId);	
 		}
 		
-		public List<Equivalence> getHoles(Domain domain)
+		public List<Equivalence> getEquivalences(Domain domain)
 		{
-			return databaseHandler.getHoles(domain);
+				return databaseHandler.getEquivalences(domain);
 		}				
 		
-		public List<Long> getUserIdHoles(Domain domain)
+		public List<Long> getUserIds(Domain domain)
 		{
-			return databaseHandler.getUserIdHoles(domain);
+			return databaseHandler.getUserIds(domain);
 		}
 		
 		public void updateText(Long id,String text)
@@ -139,7 +145,7 @@ public class DatabaseRequestService
 				return true;
 		}
 
-		public boolean addText(Group group,Text text,Equivalence equivalence)
+		public boolean addText(Text text,Equivalence equivalence,Group group)
 		{
 				databaseHandler.addText(text, equivalence, group);
 				return true;
