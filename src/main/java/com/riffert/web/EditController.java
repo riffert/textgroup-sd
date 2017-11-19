@@ -48,14 +48,15 @@ public class EditController
 		@RequestMapping(value="/remove")
 		public String delete(Model model,
 				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId,
-				@RequestParam(defaultValue="1")Domain domain)
+				@RequestParam(defaultValue="1")Domain domain,
+				@RequestParam(defaultValue="0")int currentpage)
 		{
 				if (equivalenceId != 0)
 				{
 						databaseRequestService.removeEquivalence(equivalenceId);
 				}
 				
-				return "/?domain="+domain.getId();
+				return "/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}
 		
 		@RequestMapping(value="/edit")
