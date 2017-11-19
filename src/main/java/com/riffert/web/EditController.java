@@ -120,13 +120,13 @@ public class EditController
 				
 				if (userId.equals("0"))
 				{
-					nUserId = domain.getNextEquivalenceId();
-					domain.incrementNextEquivalenceId();
+					System.out.println("** userId :"+userId);
+					nUserId = Long.parseLong(userId);
 				}
 				else
 				{
-					System.out.println("** userId :"+userId);
-					nUserId = Long.parseLong(userId);
+					nUserId = domain.getNextEquivalenceId();
+					domain.incrementNextEquivalenceId();					
 				}
 				
 				equivalence.setUserId(nUserId);
