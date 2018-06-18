@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"com.riffert.textgroup"}) // 'No qualifying bean of type' error if not present
+@EnableJpaRepositories(basePackages={"com.riffert.textgroup"})
 @EnableTransactionManagement
 public class JpaMySqlConfig
 {
@@ -27,7 +27,7 @@ public class JpaMySqlConfig
 		{
 			LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 			emf.setDataSource(getDataSource());
-			emf.setPackagesToScan("com.riffert.textgroup.dao","com.riffert.textgroup.entity"); // 'No persistence units parsed from {classpath*:META-INF/persistence.xml}' error if not present
+			emf.setPackagesToScan("com.riffert.textgroup.dao","com.riffert.textgroup.entity");
 			
 			JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 			emf.setJpaVendorAdapter(adapter);
@@ -45,28 +45,19 @@ public class JpaMySqlConfig
 			return manager;
 		}
 		
-		@Bean
+		@Bean(name="postProcessor")
 		public PersistenceExceptionTranslationPostProcessor getPostProcessor()
 		{	
 			return new PersistenceExceptionTranslationPostProcessor();
 		}
 	
-		// self added for testing purpose (no changes behavior was displayed in the logs) 
-/*		@Bean(name="postProcessor")
-		public PersistenceExceptionTranslationPostProcessor postProcessor()
-		{
-			System.out.println("cp2"); // displayed at start (because spring container init)
-			return new PersistenceExceptionTranslationPostProcessor();
-		}
-*/		
-
 		public DataSource getDataSource()
 		{
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
 			dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-			dataSource.setUrl("jdbc:mysql://localhost:3306/thedatabase");
-			dataSource.setUsername("root");
-			dataSource.setPassword("xd300%783");
+			dataSource.setUrl("jdbc:mysql://localhost:3306/database1");
+			dataSource.setUsername("user1");
+			dataSource.setPassword("pw1");
 			
 			return dataSource;
 		}
