@@ -14,6 +14,10 @@ import com.riffert.textgroup.entity.Text;
 import com.riffert.textgroup.handler.DatabaseHandler;
 
 
+/*
+ * This layer provides methods between user interface and the persistence layer
+ */
+
 @Service
 public class DatabaseRequestService
 {
@@ -58,6 +62,11 @@ public class DatabaseRequestService
 				databaseHandler.createDomain(new Domain(domainName));
 		}
 
+		public void updateDomain(Domain domain)
+		{
+				databaseHandler.updateDomain(domain);
+		}
+		
 		public List<Equivalence> getList(Equivalence equivalence)
 		{
 				List<Equivalence> listTexts = databaseHandler.getTextsEquivalence(equivalence);

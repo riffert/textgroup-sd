@@ -12,7 +12,17 @@
 				  var idx = thelist.selectedIndex;
 				  var value = thelist.options[idx].value;
 
-				  window.location = "/?domain={{domain.id}}&group="+value;
+				  window.location = "/?domain={{domain.id}}&currentpage={{currentpage}}&group="+value;
+			}
+			
+			function modifyDomain()
+			{
+				  var thelist=document.getElementById('domx');
+				  
+				  var idx = thelist.selectedIndex;
+				  var value = thelist.options[idx].value;
+
+				  window.location = "modifyDomain?domain="+value;
 			}
 
 		    function addComboItem()
@@ -22,7 +32,7 @@
 
 		    function addDomain()
 		    {
-		    		window.location = "inputDomain";
+		    		window.location = "addDomain";
 		    }
 
 		    function addGroup()

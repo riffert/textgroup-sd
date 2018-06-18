@@ -1,0 +1,14 @@
+spring.datasource.url=jdbc:mysql://localhost:3306/thedatabase
+spring.datasource.username=root
+spring.datasource.password=xd300%783
+spring.datasource.driverClassName=com.mysql.jdbc.Driver
+spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+multipart.maxFileSize=10000KB
+multipart.maxRequestSize=10000KB
+directory.images.upload.path=${user.home}/upload/
+server.port=8090
+shell.auth.simple.user.name=admin
+shell.auth.simple.user.password=admin

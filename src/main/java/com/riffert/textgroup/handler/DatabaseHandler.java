@@ -24,6 +24,11 @@ import com.riffert.textgroup.entity.Language;
 import com.riffert.textgroup.entity.Text;
 
 
+/*
+ * Persistence layer
+ */
+
+
 @Component
 @Transactional
 public class DatabaseHandler
@@ -123,6 +128,7 @@ public class DatabaseHandler
 				return equivalence;
 		}
 		
+
 		public Text addText(Text text,Equivalence equivalence,Group group)
 		{
 				textRepository.save(text);
@@ -169,6 +175,13 @@ public class DatabaseHandler
 				domainRepository.saveAndFlush(domain);
 				return domain;
 		}
+		
+		public Domain updateDomain(Domain domain)
+		{
+				domainRepository.saveAndFlush(domain);
+				return domain;
+		}
+		
 
 		public List<Domain> getDomains()
 		{

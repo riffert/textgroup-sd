@@ -3,6 +3,9 @@
 
 	<head>
 		<meta charset="UTF-8"/>
+		
+		<meta http-equiv="Content-Type: text/html; charset=shift_jis">
+		
 		<title>Translation user interface</title>
 		
 <!-- 		<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7.min.css" />		 -->
@@ -25,54 +28,7 @@
 
 		<div class="container spacer" style="display:inline;" ></div>
 
-		<div class="container spacer" >
-
-				<label>Domain :</label>
-				<select class="combobox" onchange="domx(this)" style="width: 150px;" id="domx">
-					{{#domains}}
-						<option value="{{id}}" {{{selected}}}>{{name}}</option>
-					{{/domains}}
-				</select>
-				<input type="button" value="+" onclick="addDomain();">
-				<input type="button" value="-" onclick="removeDomain();">
-
-				<div class="spacer" style="display:inline;">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</div>			
-
-				<label>Language :</label>
-				<select class="combobox" onchange="language(this)" style="width: 150px;">
-					{{#groups}}
-						<option value="{{id}}" {{{selected}}}>{{userName}}</option>
-					{{/groups}}
-				</select>
-				<input type="button" value="+" onclick="addGroup();" title="add language">
-				<input type="button" value="-" onclick="removeGroup();">
-				
-				<div class="spacer" style="display:inline;">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</div>
-
-				<form action="/" method="get" style="display:inline;">
-						<label>Search :</label>
-						<input type="text" name="keyword" value="{{keyword}}"/>
-						<input type="hidden" name="group" value="{{group.id}}"/>
-						<button type="submit">search</button>
-				</form>
-				
-				<div class="spacer" style="display:inline;">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</div>					
-				
-				<a href="add?domain={{domain.id}}&group={{group.id}}&currentpage={{currentpage}}">Add Texts</a>
-
-				<div class="spacer" style="display:inline;">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</div>					
-				
-				<a href="options?domain={{domain.id}}">Options</a>
-				
-		</div>
+		{{>body/combos}}
 
 		{{>body/pageList}}
 

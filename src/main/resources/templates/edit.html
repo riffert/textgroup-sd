@@ -4,6 +4,9 @@
 	<head>
 		<meta charset="UTF-8"/>
 		
+		<meta http-equiv="Content-Type: text/html; charset=shift_jis">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		
 		<title>edit</title>
 		
 				<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-3.3.4.css">
@@ -26,6 +29,7 @@
 					
 						<input type="hidden" name="domain" value="{{domain.id}}">
 						<input type="hidden" name="currentpage" value="{{currentpage}}">
+						<input type="hidden" name="group" value="{{group.id}}">
 						
 						<table>
 										<tr>
@@ -63,8 +67,8 @@
 						
 					</form>
 											
-					<a href="/?domain={{domain.id}}"><button>cancel</button></a>
-					<a href="/remove?equivalenceId={{equivalence.id}}&domain={{domain.id}}&currentpage={{currentpage}}"><button>delete</button></a>
+					<a href="/?domain={{domain.id}}&group={{group.id}}"><button>cancel</button></a>
+					<a href="/remove?equivalenceId={{equivalence.id}}&domain={{domain.id}}&currentpage={{currentpage}}&group={{group.id}}"><button>remove</button></a>
 
 			</div>
 	</body>

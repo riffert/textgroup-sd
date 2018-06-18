@@ -31,7 +31,7 @@ public class GroupController
 				{
 					if (group.getName().equals(groupname))
 					{
-						groupname = groupname + randomString(4);
+						groupname = groupname + "_" + randomString(4);
 					}
 				}
 			

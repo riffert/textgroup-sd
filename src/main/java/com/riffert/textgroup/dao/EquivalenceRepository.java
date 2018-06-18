@@ -8,15 +8,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Text;
 
-
-@Component
-@Transactional
+@Repository
 public interface EquivalenceRepository extends JpaRepository<Equivalence, Long>
 {
 	// TODO

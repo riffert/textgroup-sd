@@ -9,7 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 import com.riffert.textgroup.entity.Domain;
 
 
-@Component
-@Transactional
-//@Repository
+@Repository
 public interface DomainRepository extends JpaRepository<Domain, Long> {}

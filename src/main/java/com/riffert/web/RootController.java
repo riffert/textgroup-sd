@@ -29,7 +29,7 @@ public class RootController
 		public String index(Model model,
 				@RequestParam(defaultValue="0")int currentpage,
 				@RequestParam(defaultValue="")String keyword,
-				@RequestParam(defaultValue="5")int pagesize,
+				@RequestParam(defaultValue="20")int pagesize,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="1")Group group,
 				@RequestParam(defaultValue="0")String flag)
@@ -103,8 +103,6 @@ public class RootController
 				}
 				
 				treeview.validate();  // mandatory
-				
-				
 				
 				model.addAttribute("pageTexts", pageTexts);
 				model.addAttribute("treeview",treeview);

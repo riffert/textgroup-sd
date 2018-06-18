@@ -13,7 +13,8 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "language", catalog = "thedatabase")
+//@Table(name = "language", catalog = "thedatabase")
+@Table(name = "language")
 public class Language implements java.io.Serializable {
 
 	private Integer pk;

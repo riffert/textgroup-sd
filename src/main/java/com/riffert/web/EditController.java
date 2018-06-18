@@ -49,20 +49,23 @@ public class EditController
 		public String delete(Model model,
 				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId,
 				@RequestParam(defaultValue="1")Domain domain,
-				@RequestParam(defaultValue="0")int currentpage)
+				@RequestParam(defaultValue="0")int currentpage,
+				@RequestParam(defaultValue="1")Group group)
 		{
 				if (equivalenceId != 0)
 				{
 						databaseRequestService.removeEquivalence(equivalenceId);
 				}
 				
-				return "/?domain="+domain.getId()+"&currentpage="+currentpage;
+				return "/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
 		}
 		
 		@RequestMapping(value="/edit")
 		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence,
 				@RequestParam(defaultValue="0")int currentpage,
-				@RequestParam(defaultValue="1")Domain domain)
+				@RequestParam(defaultValue="1")Domain domain,
+				@RequestParam(defaultValue="1")Group group)
+		
 		{
 				List<Group> groups = databaseRequestService.getGroups(domain,new Group());
 				List<Text> texts = equivalence.getTexts();
@@ -87,6 +90,7 @@ public class EditController
 				model.addAttribute("currentpage", currentpage);
 				model.addAttribute("equivalence", equivalence);
 				model.addAttribute("domain",domain);
+				model.addAttribute("group", group);
 				
 				return "edit";
 		}
@@ -134,7 +138,7 @@ public class EditController
 				
 				databaseRequestService.save(equivalence, domain);
 			
-				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
+				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
 		}
 
 		@RequestMapping(value="/update",method=RequestMethod.POST)
@@ -143,15 +147,16 @@ public class EditController
 				for (String key : params.keySet())
 				{
 						//System.out.println("key : "+key+", value : "+params.get(key) );
-						if ( !(key.equals("domain") || key.equals("currentpage")))
+						if ( !(key.equals("domain") || key.equals("currentpage") || key.equals("group") ))
 							databaseRequestService.updateText(Long.parseLong(key), params.get(key));
 				}
 				
 				String currentpage = params.get("currentpage");
 				String domain = params.get("domain");
+				String group = params.get("group");
 				
-				if (currentpage != null && domain != null)
-					return "redirect:/?domain="+domain+"&currentpage="+currentpage;
+				if (currentpage != null && domain != null && group != null)
+					return "redirect:/?domain="+domain+"&currentpage="+currentpage+"&group="+group;
 				else
 					return "redirect:/";
 		}

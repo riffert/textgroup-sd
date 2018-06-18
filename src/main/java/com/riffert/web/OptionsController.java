@@ -28,8 +28,6 @@ public class OptionsController
 				@RequestParam(defaultValue="1")Group group,
 				@RequestParam(defaultValue="0")int currentpage)
 		{
-				List<FreeId> freeIds = new ArrayList<FreeId>();;
-				
 				System.out.println("domain -> "+domain.getId());
 				System.out.println("domain -> "+domain.getName());
 				
@@ -37,7 +35,7 @@ public class OptionsController
 				
 				for (Long nlong:userIds)
 				{
-					System.out.println("-> "+nlong);
+					System.out.println("index -> "+nlong);
 				}
 				
 				Long nextEquivalenceId = domain.getNextEquivalenceId();
@@ -47,11 +45,19 @@ public class OptionsController
 				for (int i=0;i<aPresent.length;i++)
 					aPresent[i] = false;
 
+				System.out.println("OptionsController::options()");
+				System.out.println("size : "+userIds.size());
 				for (int i=0;i<userIds.size();i++)
 				{
 					Long userId = userIds.get(i);
-					aPresent[userId.intValue()] = true;
+					
+					if (userId == null)
+						System.out.println("userIds.get("+i+") returned null ");
+					else
+						aPresent[userId.intValue()] = true;
 				}
+				
+				List<FreeId> freeIds = new ArrayList<FreeId>();
 				
 				for (int i=1;i<aPresent.length;i++)
 					if (!aPresent[i])

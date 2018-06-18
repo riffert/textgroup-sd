@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.riffert.node.Node;
 import com.riffert.node.TextNode;
 
-@Component
+
 public class Treeview
 {
 		private List<Node> nodes ;
