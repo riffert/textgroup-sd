@@ -57,7 +57,7 @@ public class EditController
 						databaseRequestService.removeEquivalence(equivalenceId);
 				}
 				
-				return "/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
+				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
 		}
 		
 		@RequestMapping(value="/removeGroup")
@@ -72,8 +72,7 @@ public class EditController
 						databaseRequestService.removeGroup(groupId);
 				}
 				
-				// TODO group & reload combo groups
-				return "/?domain="+domain.getId()+"&currentpage="+currentpage; // +"&group="+group.getId();
+				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage; // +"&group="+group.getId();
 		}
 		
 		
