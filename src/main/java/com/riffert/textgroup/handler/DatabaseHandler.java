@@ -32,6 +32,9 @@ import com.riffert.textgroup.entity.Text;
 @Transactional
 public class DatabaseHandler
 {
+	
+		public DatabaseHandler() {}
+	
 		@Autowired
 		private DomainRepository domainRepository;
 		
@@ -46,10 +49,9 @@ public class DatabaseHandler
 		
 		@Autowired
 		private LanguageRepository languageRepository;
-
 		
+		/*_____________________________________________________________________________*/
 		
-		public DatabaseHandler() {}
 		
 		public Page<Language> getLanguages(int currentpage,int pagesize)
 		{
@@ -61,34 +63,24 @@ public class DatabaseHandler
 				return languageRepository.searchByEnglishKeyword("%"+keyword+"%",new PageRequest(currentpage, pagesize));
 		}
 
-		
-		public List<Equivalence> getTextsEquivalence(Equivalence equivalence)
-		{
-				ArrayList<Equivalence> al = new ArrayList<Equivalence>();
-				al.add(new Equivalence());
-			
-				return al;
-		}
-		
-		
 		public void deleteText(Text text)
 		{
 				textRepository.delete(text);
 		}
 		
-		public Page<Text> search(String keyword,Group group,int currentpage,int pagesize)
+		public Page<Text> search(Group group,String keyword,int currentpage,int pagesize)
 		{
 				return textRepository.search("%"+keyword+"%", group,new PageRequest(currentpage, pagesize));
 		}
 		
 		public List<Equivalence> getEquivalences(Domain domain)
 		{
-			return equivalenceRepository.getEquivalences(domain);
+				return equivalenceRepository.getEquivalences(domain);
 		}				
 		
 		public List<Long> getUserIds(Domain domain)
 		{
-			return equivalenceRepository.getUserIds(domain);
+				return equivalenceRepository.getUserIds(domain);
 		}
 
 		// actually not used 
@@ -106,41 +98,20 @@ public class DatabaseHandler
 				textRepository = ctx.getBean(TextRepository.class);
 		}
 		
-		public void saveDomain(Domain domain)
+		public void save(Equivalence equivalence, Domain domain)
 		{
-				domainRepository.saveAndFlush(domain);
+				saveEquivalence(equivalence);
+				saveDomain(domain);
 		}
 		
 		public void saveEquivalence(Equivalence equivalence)
 		{
 				equivalenceRepository.saveAndFlush(equivalence);
 		}
-		
-		public Equivalence createEquivalence(Domain domain)
+
+		public void saveDomain(Domain domain)
 		{
-				Equivalence equivalence = new Equivalence();
-				equivalenceRepository.save(equivalence);
-				
-				domain.add(equivalence);
 				domainRepository.saveAndFlush(domain);
-				equivalenceRepository.saveAndFlush(equivalence);
-			
-				return equivalence;
-		}
-		
-
-		public Text addText(Text text,Equivalence equivalence,Group group)
-		{
-				textRepository.save(text);
-
-				equivalence.add(text);
-				group.add(text);
-				
-				equivalenceRepository.saveAndFlush(equivalence);
-				groupRepository.saveAndFlush(group);
-				textRepository.saveAndFlush(text);
-				
-				return text;
 		}
 		
 		public void updateText(Long id,String text)
@@ -160,6 +131,76 @@ public class DatabaseHandler
 				groupRepository.remove(groupId);
 		}
 		
+		public Domain updateDomain(Domain domain)
+		{
+				domainRepository.saveAndFlush(domain);
+				return domain;
+		}
+
+		public List<Domain> getDomains()
+		{
+				List<Domain> found = domainRepository.findAll();
+				
+				return found;
+		}
+		
+		public Domain getDomain(Domain domain)
+		{
+				return domainRepository.findOne((long)domain.getId());
+		}		
+		
+		/*_____________________________________________________________________________*/
+		
+		
+		public Equivalence getNewEquivalence(Group group)
+		{
+				return createEquivalence(group.getDomain());
+		}
+		
+		public Equivalence createEquivalence(Domain domain)
+		{
+				Equivalence equivalence = new Equivalence();
+				equivalenceRepository.save(equivalence);
+				
+				domain.add(equivalence);
+				domainRepository.saveAndFlush(domain);
+				equivalenceRepository.saveAndFlush(equivalence);
+			
+				return equivalence;
+		}		
+		
+		/*_____________________________________________________________________________*/
+		
+		
+		public boolean addText(Group group,Text text)
+		{
+				Equivalence equivalence = createEquivalence(group.getDomain());
+				addText(text, equivalence, group);
+				return true;
+		}
+
+		public Text addText(Text text,Equivalence equivalence,Group group)
+		{
+				textRepository.save(text);
+
+				equivalence.add(text);
+				group.add(text);
+				
+				equivalenceRepository.saveAndFlush(equivalence);
+				groupRepository.saveAndFlush(group);
+				textRepository.saveAndFlush(text);
+				
+				return text;
+		}
+		
+		/*_____________________________________________________________________________*/
+		
+		
+		public void addGroup(Domain domain,String groupName, String userGroupName)
+		{
+				addGroup(domain, new Group(groupName,userGroupName));
+		}
+		
 		public Group addGroup(Domain domain,Group group)
 		{
 				groupRepository.save(group);
@@ -172,31 +213,20 @@ public class DatabaseHandler
 				return group;
 		}
 		
+		/*_____________________________________________________________________________*/
+		
+		public void createDomain(String domainName)
+		{
+				createDomain(new Domain(domainName));
+		}		
+		
 		public Domain createDomain(Domain domain)
 		{
 				domainRepository.saveAndFlush(domain);
 				return domain;
 		}
 		
-		public Domain updateDomain(Domain domain)
-		{
-				domainRepository.saveAndFlush(domain);
-				return domain;
-		}
-		
-
-		public List<Domain> getDomains()
-		{
-				List<Domain> found = domainRepository.findAll();
-				
-				return found;
-				
-		}
-		
-		public Domain getDomain(Domain domain)
-		{
-				return domainRepository.findOne((long)domain.getId());
-		}
+		/*_____________________________________________________________________________*/
 		
 
 		public Map<String, List<Text>> getMap(long n)
