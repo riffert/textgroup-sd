@@ -28,7 +28,6 @@ import com.riffert.textgroup.entity.Text;
  * Persistence layer
  */
 
-
 @Component
 @Transactional
 public class DatabaseHandler
@@ -92,6 +91,7 @@ public class DatabaseHandler
 			return equivalenceRepository.getUserIds(domain);
 		}
 
+		// actually not used 
 		public Group getGroupByName(Domain domain, String groupname)
 		{
 				Group group = domain.getGroupByName(groupname);
@@ -150,14 +150,16 @@ public class DatabaseHandler
 		
 		public void removeEquivalence(Long equivalenceId)
 		{
-				Equivalence equivalence = new Equivalence();
-				equivalence.setId(equivalenceId);
-			
-				textRepository.remove(equivalence);
+				textRepository.removeEquivalence(equivalenceId);
 				equivalenceRepository.remove(equivalenceId);
 		}
 
-
+		public void removeGroup(Long groupId)
+		{
+				textRepository.removeGroup(groupId);
+				groupRepository.remove(groupId);
+		}
+		
 		public Group addGroup(Domain domain,Group group)
 		{
 				groupRepository.save(group);

@@ -23,8 +23,12 @@ public interface TextRepository extends JpaRepository<Text, Long>
 {
 
 		@Modifying
-	    @Query("delete from Text t where t.equivalence = :equivalenceId")
-	    void remove(@Param("equivalenceId") Equivalence equivalenceId);
+	    @Query("delete from Text t where t.group.id = :groupId")
+	    void removeGroup(@Param("groupId") Long groupId);	
+	
+		@Modifying
+	    @Query("delete from Text t where t.equivalence.id = :equivalenceId")
+	    void removeEquivalence(@Param("equivalenceId") Long equivalenceId);
 	
 		@Modifying
 	    @Query("UPDATE Text t SET t.value = :text WHERE t.id = :id")

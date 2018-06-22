@@ -28,45 +28,63 @@ public class OptionsController
 				@RequestParam(defaultValue="1")Group group,
 				@RequestParam(defaultValue="0")int currentpage)
 		{
-				System.out.println("domain -> "+domain.getId());
-				System.out.println("domain -> "+domain.getName());
-				
-				List<Long> userIds = databaseRequestService.getUserIds(domain);
-				
-				for (Long nlong:userIds)
-				{
-					System.out.println("index -> "+nlong);
-				}
-				
-				Long nextEquivalenceId = domain.getNextEquivalenceId();
-
-				boolean[] aPresent = new boolean[nextEquivalenceId.intValue()+1]; // TODO long
-				
-				for (int i=0;i<aPresent.length;i++)
-					aPresent[i] = false;
-
-				System.out.println("OptionsController::options()");
-				System.out.println("size : "+userIds.size());
-				for (int i=0;i<userIds.size();i++)
-				{
-					Long userId = userIds.get(i);
-					
-					if (userId == null)
-						System.out.println("userIds.get("+i+") returned null ");
-					else
-						aPresent[userId.intValue()] = true;
-				}
-				
+			
 				List<FreeId> freeIds = new ArrayList<FreeId>();
+			
+				if (domain == null || group == null)
+				{
+						domain = new Domain(" ");
+						domain.setId((long)1);
+						
+						group = new Group();
+						group.setId((long)1);
+					
+						System.out.println("**null***");
+				}
+				else
+				{
+						System.out.println("domain -> "+domain.getId());
+						System.out.println("domain -> "+domain.getName());
+						
+						List<Long> userIds = databaseRequestService.getUserIds(domain);
+						
+						for (Long nlong:userIds)
+						{
+							System.out.println("index -> "+nlong);
+						}
+						
+						Long nextEquivalenceId = domain.getNextEquivalenceId();
+		
+						boolean[] aPresent = new boolean[nextEquivalenceId.intValue()+1]; // TODO long
+						
+						for (int i=0;i<aPresent.length;i++)
+							aPresent[i] = false;
+		
+						System.out.println("OptionsController::options()");
+						System.out.println("size : "+userIds.size());
+						for (int i=0;i<userIds.size();i++)
+						{
+							Long userId = userIds.get(i);
+							
+							if (userId == null)
+								System.out.println("userIds.get("+i+") returned null ");
+							else
+								aPresent[userId.intValue()] = true;
+						}
+						
+						for (int i=1;i<aPresent.length;i++)
+							if (!aPresent[i])
+									freeIds.add(new FreeId((long)i));
+						
+				}
 				
-				for (int i=1;i<aPresent.length;i++)
-					if (!aPresent[i])
-							freeIds.add(new FreeId((long)i));
-
-				model.addAttribute("freeIds",freeIds);
+				
 				model.addAttribute("domain", domain);
 				model.addAttribute("group", group);
+				
+				model.addAttribute("freeIds",freeIds);
 				model.addAttribute("currentpage", currentpage);
+				
 				return "options";
 		}
 }

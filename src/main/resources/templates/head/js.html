@@ -42,7 +42,13 @@
 
 		    function removeGroup()
 		    {
-		    		alert("not implemented in this version, sorry !");
+		    		  // alert("not implemented in this version, sorry !");
+					  var thelist=document.getElementById('grpx');
+					  
+					  var idx = thelist.selectedIndex;
+					  var value = thelist.options[idx].value;
+					  
+					  window.location = "removeGroup?groupId="+value+"&domain={{domain.id}}&currentpage={{currentpage}}";
 		    }
 		    
 		    

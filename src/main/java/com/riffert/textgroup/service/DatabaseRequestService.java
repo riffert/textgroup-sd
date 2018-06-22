@@ -25,16 +25,14 @@ public class DatabaseRequestService
 		@Autowired
 		private DatabaseHandler databaseHandler;
 		
-		
-		public void save(Equivalence equivalence, Domain domain)
-		{
-				databaseHandler.saveEquivalence(equivalence);
-				databaseHandler.saveDomain(domain);
-		}
-
 		public void removeEquivalence(Long equivalenceId)
 		{
 				databaseHandler.removeEquivalence(equivalenceId);	
+		}
+		
+		public void removeGroup(Long groupId)
+		{
+				databaseHandler.removeGroup(groupId);
 		}
 		
 		public List<Equivalence> getEquivalences(Domain domain)
@@ -79,36 +77,48 @@ public class DatabaseRequestService
 				return pageTexts;
 		}
 		
-		public List<Domain> getDomains(Domain domain)
+		public Equivalence getNewEquivalence(Group group)
 		{
-				List<Domain> domains = databaseHandler.getDomains();
-				
-				if ( domains != null )
-				{
-						boolean  bFound = false;
-						
-						for (int i=0;i<domains.size();i++)
-						{
-							Domain dom = domains.get(i);
-							
-							if ( dom == domain )
-							{
-								bFound = true;
-								dom.setSelected("selected=\"selected\"");
-							}
-							else
-								dom.setSelected("");
-						}
-						
-						if ( !bFound && domains.size() > 0 )
-							domains.get(0).setSelected("selected=\"selected\"");
-						
-				}
-				
-				return domains;
+				return databaseHandler.createEquivalence(group.getDomain());
+		}
+		
+		//-----------------------------------------------------------------------------//
+		
+		public void save(Equivalence equivalence, Domain domain)
+		{
+				databaseHandler.saveEquivalence(equivalence);
+				databaseHandler.saveDomain(domain);
+		}
+		
+		
+		public boolean addText(Group group,Text text)
+		{
+				Equivalence equivalence = databaseHandler.createEquivalence(group.getDomain());
+				databaseHandler.addText(text, equivalence, group);
+				return true;
 		}
 
-	
+		public boolean addText(Text text,Equivalence equivalence,Group group)
+		{
+				databaseHandler.addText(text, equivalence, group);
+				return true;
+		}
+
+		
+		public Page<Language> getLanguages(int currentpage,int pagesize)
+		{
+				return databaseHandler.getLanguages(currentpage,pagesize);
+		}
+		
+		public Page<Language> getLanguagesByEnglishKeyword(String keyword,int currentpage,int pagesize)
+		{
+				return databaseHandler.getLanguagesByEnglishKeyword(keyword,currentpage,pagesize);
+		}
+		
+		public void addGroup(Domain domain,String groupName, String userGroupName)
+		{
+				databaseHandler.addGroup(domain, new Group(groupName,userGroupName));
+		}
 
 		public List<Group> getGroups(Domain domain, Group group)
 		{
@@ -141,39 +151,37 @@ public class DatabaseRequestService
 				return groups;
 		}
 		
-		
-		public Equivalence getNewEquivalence(Group group)
+		public List<Domain> getDomains(Domain domain)
 		{
-				return databaseHandler.createEquivalence(group.getDomain());
+				List<Domain> domains = databaseHandler.getDomains();
+				
+				if ( domains != null )
+				{
+						boolean  bFound = false;
+						
+						for (int i=0;i<domains.size();i++)
+						{
+							Domain dom = domains.get(i);
+							
+							if ( dom == domain )
+							{
+								bFound = true;
+								dom.setSelected("selected=\"selected\"");
+							}
+							else
+								dom.setSelected("");
+						}
+						
+						if ( !bFound && domains.size() > 0 )
+							domains.get(0).setSelected("selected=\"selected\"");
+						
+				}
+				
+				return domains;
 		}
 		
-		public boolean addText(Group group,Text text)
-		{
-				Equivalence equivalence = databaseHandler.createEquivalence(group.getDomain());
-				databaseHandler.addText(text, equivalence, group);
-				return true;
-		}
-
-		public boolean addText(Text text,Equivalence equivalence,Group group)
-		{
-				databaseHandler.addText(text, equivalence, group);
-				return true;
-		}
-
 		
-		public Page<Language> getLanguages(int currentpage,int pagesize)
-		{
-				return databaseHandler.getLanguages(currentpage,pagesize);
-		}
 		
-		public Page<Language> getLanguagesByEnglishKeyword(String keyword,int currentpage,int pagesize)
-		{
-				return databaseHandler.getLanguagesByEnglishKeyword(keyword,currentpage,pagesize);
-		}
 		
-		public void addGroup(Domain domain,String groupName, String userGroupName)
-		{
-				databaseHandler.addGroup(domain, new Group(groupName,userGroupName));
-		}
 		
 }

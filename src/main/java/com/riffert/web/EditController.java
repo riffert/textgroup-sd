@@ -45,8 +45,8 @@ public class EditController
 		}
 
 		
-		@RequestMapping(value="/remove")
-		public String delete(Model model,
+		@RequestMapping(value="/removeEquivalence")
+		public String removeEquivalence(Model model,
 				@RequestParam(defaultValue="0",name="equivalenceId")Long equivalenceId,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="0")int currentpage,
@@ -59,6 +59,23 @@ public class EditController
 				
 				return "/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
 		}
+		
+		@RequestMapping(value="/removeGroup")
+		public String removeGroup(Model model,
+				@RequestParam(defaultValue="0",name="groupId")Long groupId,
+				@RequestParam(defaultValue="1")Domain domain,
+				@RequestParam(defaultValue="0")int currentpage,
+				@RequestParam(defaultValue="1")Group group)
+		{
+				if (groupId != 0)
+				{
+						databaseRequestService.removeGroup(groupId);
+				}
+				
+				// TODO group & reload combo groups
+				return "/?domain="+domain.getId()+"&currentpage="+currentpage; // +"&group="+group.getId();
+		}
+		
 		
 		@RequestMapping(value="/edit")
 		public String edit(Model model,@RequestParam(defaultValue="1")Equivalence equivalence,

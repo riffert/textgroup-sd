@@ -23,7 +23,6 @@ public interface EquivalenceRepository extends JpaRepository<Equivalence, Long>
 	//List<Equivalence> search(@Param(value = "e") Equivalence equivalence);
 	
 	@Modifying
-    @Transactional
     @Query("delete from Equivalence e where e.id = :equivalenceId")
     void remove(@Param("equivalenceId") Long equivalenceId);
 	

@@ -27,9 +27,9 @@ public class DatabaseConfig
 
 	        org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
 	        ds.setDriverClassName("com.mysql.jdbc.Driver");
-	        ds.setUrl("jdbc:mysql://localhost:3306/database1");
-	        ds.setUsername("username1");
-	        ds.setPassword("pw1");
+	        ds.setUrl("jdbc:mysql://localhost:3306/textgroup_test1");
+	        ds.setUsername("root");
+	        ds.setPassword("783183");
 	        ds.setMaxActive(2); // max connections
 	        ds.setMaxWait(2);
 	        ds.setTimeBetweenEvictionRunsMillis(100);
@@ -52,9 +52,9 @@ public class DatabaseConfig
 			
 	        org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
 	        ds.setDriverClassName("com.mysql.jdbc.Driver");
-	        ds.setUrl("jdbc:mysql://localhost:3306/database2");
-	        ds.setUsername("username2");
-	        ds.setPassword("pw2");
+	        ds.setUrl("jdbc:mysql://localhost:3306/textgroup_test2");
+	        ds.setUsername("root");
+	        ds.setPassword("783183");
 	        ds.setDefaultAutoCommit(true);
 	        //ds.setUseDisposableConnectionFacade(true);// test
 	        ds.setMaxActive(2);
