@@ -1,6 +1,5 @@
 package com.riffert.textgroup.handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,13 +82,6 @@ public class DatabaseHandler
 				return equivalenceRepository.getUserIds(domain);
 		}
 
-		// actually not used 
-		public Group getGroupByName(Domain domain, String groupname)
-		{
-				Group group = domain.getGroupByName(groupname);
-				return group;
-		}
-		
 		public DatabaseHandler(AnnotationConfigApplicationContext ctx)
 		{
 				domainRepository = ctx.getBean(DomainRepository.class);
