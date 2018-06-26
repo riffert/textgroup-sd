@@ -38,17 +38,19 @@ public class RootController
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);
 				
+				List<Group> groups = null;
+				
 				if (domain != null )
 				{
-						List<Group> groups = domain.getGroups();
+						groups = domain.getGroups();
 						
-						if (groups.size() > 0 && group.getId() == 1 )
+						if (groups != null && groups.size() > 0 && group != null && group.getId() == 1 )
 						{
 								group = groups.get(0);
 						}
 				}
 				
-				List<Group> groups = databaseRequestService.getGroups(domain,group);
+				groups = databaseRequestService.getGroups(domain,group);
 				
 				if ( flag.equals("1") )
 				{
@@ -61,52 +63,52 @@ public class RootController
 				if ( bFlag )
 				{
 
-				Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
-				
-				Nav[] navs = null;
-				
-				int pagesCount = pageTexts.getTotalPages();
-				
-				
-				navs = new Nav[pagesCount];
-				
-				for (int i=0;i<pagesCount;i++){
-					navs[i] = new Nav(i,currentpage);
-				}
-				
-				Treeview treeview = new Treeview();
-				
-
-				for (Text text:pageTexts)
-				{
-						Equivalence equivalence = text.getEquivalence();
+						Page<Text> pageTexts = databaseRequestService.getPage(group, keyword, currentpage, pagesize);
 						
-						TextNode textnode;
+						Nav[] navs = null;
 						
-						textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"", "");
-							
-						Node node = treeview.addNode(textnode);
+						int pagesCount = pageTexts.getTotalPages();
 						
-						List<Text> texts = equivalence.getTexts();
 						
-						for (Text txt:texts)
-						{	
+						navs = new Nav[pagesCount];
+						
+						for (int i=0;i<pagesCount;i++){
+							navs[i] = new Nav(i,currentpage);
+						}
+						
+						Treeview treeview = new Treeview();
+						
+		
+						for (Text text:pageTexts)
+						{
+								Equivalence equivalence = text.getEquivalence();
 								
-								if (txt.getGroup() != group)
-								{
-									String value = txt.getValue();
-									equivalence = txt.getEquivalence();
-
-									node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+"", ""));
+								TextNode textnode;
+								
+								textnode = new TextNode(text.getValue(), equivalence.getId()+"",equivalence.getUserId()+"", "");
+									
+								Node node = treeview.addNode(textnode);
+								
+								List<Text> texts = equivalence.getTexts();
+								
+								for (Text txt:texts)
+								{	
+										
+										if (txt.getGroup() != group)
+										{
+											String value = txt.getValue();
+											equivalence = txt.getEquivalence();
+		
+											node.addChild(new TextNode(value,equivalence.getId()+"",equivalence.getUserId()+"", ""));
+										}
 								}
 						}
-				}
-				
-				treeview.validate();  // mandatory
-				
-				model.addAttribute("pageTexts", pageTexts);
-				model.addAttribute("treeview",treeview);
-				model.addAttribute("navs", navs);		
+						
+						treeview.validate();  // mandatory
+						
+						model.addAttribute("pageTexts", pageTexts);
+						model.addAttribute("treeview",treeview);
+						model.addAttribute("navs", navs);		
 
 				}
 				

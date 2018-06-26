@@ -47,6 +47,7 @@ public class Equivalence
 		}
 
 		public void setUserId(Long userId) {
+			System.out.println("** setUserId VALUE :"+userId);
 			this.userId = userId;
 		}
 		

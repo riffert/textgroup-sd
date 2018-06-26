@@ -34,6 +34,13 @@ public class Domain implements Serializable
 			super();
 		}
 	
+		public Domain(long id)
+		{
+			this();
+			setId(id);
+		}
+
+		
 		/*________________________________________________________________________*/
 		
 		@Column(name="next_equivalence_id")

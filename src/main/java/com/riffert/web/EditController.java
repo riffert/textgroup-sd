@@ -33,7 +33,17 @@ public class EditController
 				
 				if (userId == 0)
 					userId = domain.getNextEquivalenceId();
-					
+				
+				if (domain == null)
+					domain = new Domain(1);
+				
+				if (group == null)
+				{
+						group = new Group(1);
+						
+						if (groups.size() > 0)
+							group.setId((long) groups.get(0).getId());
+				}
 				
 				model.addAttribute("userId", userId);
 				model.addAttribute("domain", domain);
@@ -128,33 +138,34 @@ public class EditController
 						@RequestParam(defaultValue="0")int currentpage,
 						@RequestParam(defaultValue="0")String userId)
 		{		
-				Equivalence equivalence = databaseRequestService.getNewEquivalence(group);
-				List<Group> groups = databaseRequestService.getGroups(domain,group);
-				
-				for (Group groop:groups)
-				{
-						String text = params.get(groop.getName());
-						databaseRequestService.addText(new Text(text), equivalence,groop);
-				}
-				
-				Long nUserId;
-				
-				if (userId.equals("0"))
-				{
-					System.out.println("** userId :"+userId);
-					nUserId = Long.parseLong(userId);
-				}
-				else
-				{
-					nUserId = domain.getNextEquivalenceId();
-					domain.incrementNextEquivalenceId();					
-				}
-				
-				equivalence.setUserId(nUserId);
-				
-				databaseRequestService.save(equivalence, domain);
 			
-				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
+				if (group != null)
+				{
+			
+						Equivalence equivalence = databaseRequestService.getNewEquivalence(group);
+						List<Group> groups = databaseRequestService.getGroups(domain,group);
+						
+						for (Group groop:groups)
+						{
+								String text = params.get(groop.getName());
+								databaseRequestService.addText(new Text(text), equivalence,groop);
+						}
+						
+						Long nUserId = Long.parseLong(userId);;
+						
+						if ( domain.getNextEquivalenceId() == nUserId)
+						{
+							domain.incrementNextEquivalenceId();
+						}
+						
+						equivalence.setUserId(nUserId);
+						
+						databaseRequestService.save(equivalence, domain);
+						
+						return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage+"&group="+group.getId();
+				}
+			
+				return "redirect:/";
 		}
 
 		@RequestMapping(value="/update",method=RequestMethod.POST)

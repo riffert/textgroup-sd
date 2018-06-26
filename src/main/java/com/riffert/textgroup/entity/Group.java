@@ -38,6 +38,12 @@ public class Group implements Serializable
 		{
 			super();
 		}
+
+		public Group(long id)
+		{
+			this();
+			setId(id);
+		}
 		
 		/*________________________________________________________________________*/
 		
