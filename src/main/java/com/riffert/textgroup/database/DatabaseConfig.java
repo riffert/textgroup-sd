@@ -14,12 +14,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 
 @Configuration
 public class DatabaseConfig
 {
+	
+		@Bean
+		public JpaVendorAdapter jpaVendorAdapter()
+		{
+		    HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+		    jpaVendorAdapter.setGenerateDdl(true);
+		    jpaVendorAdapter.setShowSql(true);
+	
+		    return jpaVendorAdapter;
+		}
+	
 
 		public DataSource dataSource1()
 		{

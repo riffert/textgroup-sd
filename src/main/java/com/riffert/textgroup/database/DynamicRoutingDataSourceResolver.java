@@ -43,7 +43,7 @@ public class DynamicRoutingDataSourceResolver extends AbstractRoutingDataSource
 	    	if (_session() != null)
 	    	{
 	    		String value = (String) _session().getAttribute("value");
-	    		System.out.println("*** value --> "+value);
+	    		//System.out.println("*** value --> "+value);
 	    		
 	    		if (value == null)
 	    		{

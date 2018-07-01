@@ -34,6 +34,7 @@ public class RootController
 				@RequestParam(defaultValue="1")Group group,
 				@RequestParam(defaultValue="0")String flag)
 		{
+			
 				boolean bFlag = true;
 			
 				List<Domain> domains = databaseRequestService.getDomains(domain);

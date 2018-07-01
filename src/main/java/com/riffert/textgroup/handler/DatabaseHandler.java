@@ -28,7 +28,6 @@ import com.riffert.textgroup.entity.Text;
  */
 
 @Component
-@Transactional
 public class DatabaseHandler
 {
 	
@@ -111,16 +110,28 @@ public class DatabaseHandler
 				textRepository.updateText(id, text);
 		}
 		
+		@Transactional
 		public void removeEquivalence(Long equivalenceId)
 		{
 				textRepository.removeEquivalence(equivalenceId);
 				equivalenceRepository.remove(equivalenceId);
 		}
 
-		public void removeGroup(Long groupId)
+		@Transactional
+		public void removeGroup(Domain domain, Group group)
 		{
-				textRepository.removeGroup(groupId);
-				groupRepository.remove(groupId);
+				if ( group != null )
+				{
+						textRepository.removeGroup(group.getId());
+						groupRepository.remove(group.getId());
+						
+						if (domain.getGroups().size() == 0)
+						{
+								equivalenceRepository.removeDomain(domain.getId());
+								domain.setNextEquivalenceId((long) 1);
+								updateDomain(domain);
+						}
+				}
 		}
 		
 		public Domain updateDomain(Domain domain)
@@ -138,7 +149,7 @@ public class DatabaseHandler
 		
 		public Domain getDomain(Domain domain)
 		{
-				return domainRepository.findOne((long)domain.getId());
+				return domainRepository.findOne((long)domain.getId()); // getOne() : what is the difference ?
 		}		
 		
 		/*_____________________________________________________________________________*/

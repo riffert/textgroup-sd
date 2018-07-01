@@ -104,8 +104,7 @@ public class Domain implements Serializable
 		
 		/*________________________________________________________________________*/		
 		
-
-		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER,mappedBy="domain")
+		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="domain")
 		private List<Group> groups = new ArrayList<Group>();
 
 		public List<Group> getGroups() {

@@ -72,17 +72,18 @@ public class EditController
 		
 		@RequestMapping(value="/removeGroup")
 		public String removeGroup(Model model,
-				@RequestParam(defaultValue="0",name="groupId")Long groupId,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="0")int currentpage,
 				@RequestParam(defaultValue="1")Group group)
 		{
-				if (groupId != 0)
+				System.out.println("** print from '/removeGroup' controller **");
+			
+				if (group != null)
 				{
-						databaseRequestService.removeGroup(groupId);
+						databaseRequestService.removeGroup(domain, group);
 				}
 				
-				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage; // +"&group="+group.getId();
+				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}
 		
 		

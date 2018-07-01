@@ -1,5 +1,6 @@
 package com.riffert.textgroup.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="equivalence")
-public class Equivalence
+public class Equivalence implements Serializable
 {
 		public Equivalence()
 		{

@@ -14,9 +14,7 @@ import com.riffert.textgroup.entity.Group;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long>
 {
-	
 	@Modifying
     @Query("delete from Group g where g.id = :groupId")
     void remove(@Param("groupId") Long groupId);	
-
 }
