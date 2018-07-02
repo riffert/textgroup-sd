@@ -76,12 +76,8 @@ public class EditController
 				@RequestParam(defaultValue="0")int currentpage,
 				@RequestParam(defaultValue="1")Group group)
 		{
-				System.out.println("** print from '/removeGroup' controller **");
-			
 				if (group != null)
-				{
 						databaseRequestService.removeGroup(domain, group);
-				}
 				
 				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}

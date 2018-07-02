@@ -45,10 +45,8 @@ public class RootController
 				{
 						groups = domain.getGroups();
 						
-						if (groups != null && groups.size() > 0 && group != null && group.getId() == 1 )
-						{
+						if (groups != null && groups.size() > 0 && group == null)
 								group = groups.get(0);
-						}
 				}
 				
 				groups = databaseRequestService.getGroups(domain,group);
@@ -121,8 +119,10 @@ public class RootController
 				
 				if (group == null )
 				{
-					group = new Group("");
-					group.setId((long) 1);
+					if ( groups != null && groups.size() > 0 )
+						group = new Group(groups.get(0).getId());
+					else
+						group = new Group("");
 				}
 
 				model.addAttribute("domain", domain);

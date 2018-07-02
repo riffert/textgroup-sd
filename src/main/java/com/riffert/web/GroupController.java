@@ -37,7 +37,7 @@ public class GroupController
 			
 				databaseRequestService.addGroup(domain, groupname, usergroupname );
 			
-				return "redirect:/";
+				return "redirect:/?domain="+domain.getId()+"&flag=1";
 		}
 		
 		private String randomString(int nlen)

@@ -28,6 +28,7 @@ import com.riffert.textgroup.entity.Text;
  */
 
 @Component
+@Transactional
 public class DatabaseHandler
 {
 	
@@ -110,14 +111,14 @@ public class DatabaseHandler
 				textRepository.updateText(id, text);
 		}
 		
-		@Transactional
+		
 		public void removeEquivalence(Long equivalenceId)
 		{
 				textRepository.removeEquivalence(equivalenceId);
 				equivalenceRepository.remove(equivalenceId);
 		}
 
-		@Transactional
+		
 		public void removeGroup(Domain domain, Group group)
 		{
 				if ( group != null )
@@ -160,6 +161,7 @@ public class DatabaseHandler
 				return createEquivalence(group.getDomain());
 		}
 		
+		
 		public Equivalence createEquivalence(Domain domain)
 		{
 				Equivalence equivalence = new Equivalence();
@@ -182,6 +184,7 @@ public class DatabaseHandler
 				return true;
 		}
 
+		
 		public Text addText(Text text,Equivalence equivalence,Group group)
 		{
 				textRepository.save(text);
@@ -203,6 +206,7 @@ public class DatabaseHandler
 		{
 				addGroup(domain, new Group(groupName,userGroupName));
 		}
+		
 		
 		public Group addGroup(Domain domain,Group group)
 		{
