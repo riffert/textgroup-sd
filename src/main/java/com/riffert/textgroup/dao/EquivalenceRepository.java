@@ -18,10 +18,6 @@ import com.riffert.textgroup.entity.Text;
 @Repository
 public interface EquivalenceRepository extends JpaRepository<Equivalence, Long>
 {
-	// TODO
-	//@Query("select e from Equivalence e where e.equivalence = :e")
-	//List<Equivalence> search(@Param(value = "e") Equivalence equivalence);
-
 	@Modifying
     @Query("delete from Equivalence e where e.domain.id = :domainId")
     void removeDomain(@Param("domainId") Long domainId);

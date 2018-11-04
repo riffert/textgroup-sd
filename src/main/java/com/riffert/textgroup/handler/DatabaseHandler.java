@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import com.riffert.textgroup.dao.DomainRepository;
 import com.riffert.textgroup.dao.EquivalenceRepository;
 import com.riffert.textgroup.dao.GroupRepository;
 import com.riffert.textgroup.dao.LanguageRepository;
+import com.riffert.textgroup.dao.SomethingRepository;
 import com.riffert.textgroup.dao.TextRepository;
 import com.riffert.textgroup.entity.Domain;
 import com.riffert.textgroup.entity.Equivalence;
@@ -27,7 +30,6 @@ import com.riffert.textgroup.entity.Text;
  * Persistence layer
  */
 
-@Component
 @Transactional
 public class DatabaseHandler
 {
@@ -48,6 +50,12 @@ public class DatabaseHandler
 		
 		@Autowired
 		private LanguageRepository languageRepository;
+		
+		@Autowired
+		private SomethingRepository somethingRepository;
+		
+		@Autowired
+		private EntityManager entityManager;
 		
 		/*_____________________________________________________________________________*/
 		
@@ -117,20 +125,27 @@ public class DatabaseHandler
 				textRepository.removeEquivalence(equivalenceId);
 				equivalenceRepository.remove(equivalenceId);
 		}
-
 		
-		public void removeGroup(Domain domain, Group group)
+		public void removeGroup(Domain domain, Group group) throws InterruptedException
 		{
 				if ( group != null )
 				{
 						textRepository.removeGroup(group.getId());
 						groupRepository.remove(group.getId());
 						
-						if (domain.getGroups().size() == 0)
+						Domain dom = somethingRepository.findOne(domain.getId());
+						somethingRepository.refresh(dom);
+						
+						System.out.println("dom.getId() : "+dom.getId());
+						System.out.println("dom.getGroups().size() :"+dom.getGroups().size());
+						
+						if (dom.getGroups().size() == 0)
 						{
 								equivalenceRepository.removeDomain(domain.getId());
 								domain.setNextEquivalenceId((long) 1);
 								updateDomain(domain);
+							
+								System.out.println("dom.getGroups().size() == 0 : ok");
 						}
 				}
 		}
@@ -150,7 +165,7 @@ public class DatabaseHandler
 		
 		public Domain getDomain(Domain domain)
 		{
-				return domainRepository.findOne((long)domain.getId()); // getOne() : what is the difference ?
+				return domainRepository.findOne((long)domain.getId());
 		}		
 		
 		/*_____________________________________________________________________________*/

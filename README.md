@@ -1,15 +1,14 @@
-# textgroup
+# textgroup-sd (spring-data persistence layer)
 Spring-boot app using hibernate-jpa,spring data and a treeview bootstrap to build and visualize a multilingual database (for equivalences), can be used for example for making a web site multilingual
 
-1) setting up the 'application.properties' file with the 'create' option (spring.jpa.hibernate.ddl-auto=create, uncomment/comment next line if necessary) and delete the language (0 records table after first startup), use the maven command to build and run on localhost:8080 : 'mvn package spring-boot:run'<br>
-2) build your language table from language.sql (for example with phpmyadmin / mysql)<br>
-3) restart with 'validate' option in the 'application.properties' file<br>
-4) add a domain<br>
-5) add language(s)<br>
-6) add text(s)<br>
-<br>
-Note : To read the database in a non spring-boot app,you must copy the config and textgroup packages in your app and update your web.xml file to configure the listener for the Init class to load the map (hm) with the values at startup.<br>
-Warning : To run the spring boot app, the config package must be <b>removed</b> before starting, this package is present only for demo.
+<ul>
+	<li>Start the application (mvn package spring-boot:run) with property <b>spring.jpa.hibernate.ddl-auto</b> set to <b>create</b> in 'application.properties' file</li>
+	<li>After startup, build the language table from <b>language.sql</b></li>
+	<li>Restart with <b>validate</b> option for <b>spring.jpa.hibernate.ddl-auto</b></li>
+</ul>
+
+Note : To read the database in a non spring-boot application,you must copy the config and textgroup packages in your application and update your web.xml file to configure the listener for <b>Init</b> class to load the map <b>(hm)</b> at startup.<br><br>
+Since commit v0.3.5 the application is multidatabases session access based for jpa  
 <br>
 
 

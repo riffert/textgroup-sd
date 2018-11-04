@@ -1,6 +1,5 @@
 package com.riffert.web;
 
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ public class GroupController
 				@RequestParam(defaultValue="")String usergroupname)
 		{		
 				// checking if groupname already present
-				// (user has added 2 or more times the same language)
 				for(Group group:domain.getGroups())
 				{
 					if (group.getName().equals(groupname))

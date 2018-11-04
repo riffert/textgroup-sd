@@ -1,10 +1,8 @@
 package com.riffert.node;
 
-import java.util.List;
-
 public class TextNode extends Node
 {
-		// TODO setting from properties
+		// TODO setting from properties file
 		private static final String BG_COLOR = "#F9F9F9";
 		
 		private char c;

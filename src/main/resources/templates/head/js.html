@@ -58,7 +58,11 @@
 
 		    function removeDomain()
 		    {
-		    		alert("not implemented in this version, sorry !");
+		    		  var thelist=document.getElementById('domx');
+					  var idx = thelist.selectedIndex;
+					  var value = thelist.options[idx].value;
+					  
+					  window.location = "removeDomain?domain="+value;
 		    }
 		    			
 		    

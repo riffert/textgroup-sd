@@ -38,14 +38,9 @@ public class OptionsController
 						
 						group = new Group();
 						group.setId((long)1);
-					
-						System.out.println("**null***");
 				}
 				else
 				{
-						System.out.println("domain -> "+domain.getId());
-						System.out.println("domain -> "+domain.getName());
-						
 						List<Long> userIds = databaseRequestService.getUserIds(domain);
 						
 						for (Long nlong:userIds)

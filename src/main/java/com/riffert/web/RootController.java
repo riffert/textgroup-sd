@@ -36,7 +36,7 @@ public class RootController
 		{
 			
 				boolean bFlag = true;
-			
+				
 				List<Domain> domains = databaseRequestService.getDomains(domain);
 				
 				List<Group> groups = null;
@@ -122,7 +122,7 @@ public class RootController
 					if ( groups != null && groups.size() > 0 )
 						group = new Group(groups.get(0).getId());
 					else
-						group = new Group("");
+						group = new Group(1);
 				}
 
 				model.addAttribute("domain", domain);
@@ -137,8 +137,5 @@ public class RootController
 				
 				return "list";
 		}
-
-
-
 		
 }

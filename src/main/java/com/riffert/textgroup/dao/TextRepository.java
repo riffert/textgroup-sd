@@ -45,7 +45,6 @@ public interface TextRepository extends JpaRepository<Text, Long>
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "d") Domain domain,Pageable p);
 
 		// searching in same group
-		// @Query("select t from Text t where t.value like :v and t.group = :g")
 		@Query("select t from Text t where t.value like :v and t.group = :g order by t.equivalence.userId")
 		Page<Text> search(@Param(value = "v") String searchValue,@Param(value = "g") Group group,Pageable p);
 		

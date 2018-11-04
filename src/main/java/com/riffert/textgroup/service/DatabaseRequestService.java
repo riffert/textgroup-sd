@@ -2,14 +2,11 @@ package com.riffert.textgroup.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.riffert.textgroup.entity.Domain;
-import com.riffert.textgroup.entity.Equivalence;
 import com.riffert.textgroup.entity.Group;
-import com.riffert.textgroup.entity.Language;
 import com.riffert.textgroup.entity.Text;
 import com.riffert.textgroup.handler.DatabaseHandler;
 

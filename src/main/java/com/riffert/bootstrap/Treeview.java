@@ -16,33 +16,33 @@ public class Treeview
 		public Treeview()
 		{
 			nodes = new ArrayList<Node>();
-			//TextNode node1 = new TextNode("parent 1");
-			//nodes.add(node1);
 		}
-		
-//		public Treeview()
-//		{
-//			nodes = new ArrayList<Node>();
-//			
-//			TextNode node1 = new TextNode("parent 1");
-//			
-//			TextNode test = node1.addChild("child1").addChild("subchild 1").addChild("sub-sub child1");
-//			test.addChild("one more time 1");
-//			test.addChild("one more time 2");
-//			
-//			node1.getNode(0).addChild("hello");
-//			
-//			node1.addChild("child2");
-//			
-//			TextNode node2 = new TextNode("parent 2");
-//			node2.addChild("child 2.1");
-//			node2.addChild("child 2.2");
-//			
-//			nodes.add(node1);
-//			nodes.add(node2);
-//
-//			validate(); // don't forget
-//		}
+
+		/*
+		public Treeview()
+		{
+			nodes = new ArrayList<Node>();
+			
+			TextNode node1 = new TextNode("test parent 1");
+			
+			TextNode test = node1.addChild("child1").addChild("subchild 1").addChild("sub-sub child1");
+			test.addChild("another 1");
+			test.addChild("another 2");
+			
+			node1.getNode(0).addChild("foo");
+			
+			node1.addChild("child2");
+			
+			TextNode node2 = new TextNode("test parent 2");
+			node2.addChild("child 2.1");
+			node2.addChild("child 2.2");
+			
+			nodes.add(node1);
+			nodes.add(node2);
+
+			validate(); // don't forget
+		}
+		*/
 		
 		public void validate()
 		{
@@ -52,8 +52,7 @@ public class Treeview
 				{
 					((TextNode)nodes.get(nodes.size()-1)).setC(' ');
 					nodes.forEach(node->node.validate());
-					
-					//nodes.stream().forEach(node->node.validate());
+
 				}
 			}
 		}		

@@ -3,8 +3,13 @@ package com.riffert.web;
 import java.util.List;
 import java.util.Map;
 
+//import javax.persistence.EntityManager;
+
+//import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,13 +79,47 @@ public class EditController
 		public String removeGroup(Model model,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="0")int currentpage,
-				@RequestParam(defaultValue="1")Group group)
+				@RequestParam(defaultValue="0")Group group) throws InterruptedException
 		{
 				if (group != null)
 						databaseRequestService.removeGroup(domain, group);
 				
 				return "redirect:/?domain="+domain.getId()+"&currentpage="+currentpage;
 		}
+
+		@Transactional
+		@RequestMapping(value="/removeDomain")
+		public String removeDomain(Model model,
+				@RequestParam(defaultValue="0")Domain domain) throws InterruptedException
+		{
+			
+				if (domain != null)
+				{
+						System.out.println("domain.getId() : "+domain.getId());
+					
+						List<Group> groups = domain.getGroups();
+						
+						if ( groups != null)
+						{
+								//for (Group group:groups)
+								for (int i=0;i<groups.size();i++)	
+								{
+										if ( groups.get(i) != null)
+										{
+												Group group = groups.get(i);
+												
+												System.out.println("group.getId() : "+group.getId());
+												
+												if (group != null)
+													databaseRequestService.removeGroup(domain, group);
+										}
+								}
+						}
+				}
+			
+				return "redirect:/";
+		}
+		
 		
 		
 		@RequestMapping(value="/edit")
@@ -170,7 +209,6 @@ public class EditController
 		{		
 				for (String key : params.keySet())
 				{
-						//System.out.println("key : "+key+", value : "+params.get(key) );
 						if ( !(key.equals("domain") || key.equals("currentpage") || key.equals("group") ))
 							databaseRequestService.updateText(Long.parseLong(key), params.get(key));
 				}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -73,6 +74,7 @@ public class Domain implements Serializable
 		}
 
 		public void setId(Long id) {
+			System.out.println("** Domain::setId() [sd]** :"+id);
 			this.id = id;
 		}
 		
@@ -86,6 +88,7 @@ public class Domain implements Serializable
 		}
 	
 		public void setName(String name) {
+			System.out.println("** Domain::setName() [sd]** : "+name);
 			this.name = name;
 		}	
 		

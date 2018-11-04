@@ -1,4 +1,4 @@
-package com.riffert.textgroup.database;
+package com.riffert.config;
 
 import org.seasar.doma.AnnotateWith;
 import org.seasar.doma.Annotation;

@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name="groop")
 public class Group implements Serializable
@@ -100,7 +103,8 @@ public class Group implements Serializable
 		
 		/*________________________________________________________________________*/
 
-		@ManyToOne
+		@ManyToOne(optional = true)
+		@NotFound(action=NotFoundAction.IGNORE)
 		private Domain domain;
 
 		public Domain getDomain() {

@@ -27,8 +27,6 @@ public class LanguageController
 				@RequestParam(defaultValue="")String dest,
 				@RequestParam(defaultValue="10")int pagesize)
 		{		
-				//Page<Language> languages = databaseRequestService.getLanguages(currentpage, pagesize);
-			
 				Page<Language> languages = databaseRequestService.getLanguagesByEnglishKeyword(keyword,currentpage, pagesize);
 				
 				Nav[] navs = null;
