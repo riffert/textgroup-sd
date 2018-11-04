@@ -1,4 +1,4 @@
-# textgroup-sd (spring-data persistence layer)
+# textgroup-sd (spring-data based persistence layer)
 Spring-boot app using hibernate-jpa,spring data and a treeview bootstrap to build and visualize a multilingual database (for equivalences), can be used for example for making a web site multilingual
 
 <ul>
