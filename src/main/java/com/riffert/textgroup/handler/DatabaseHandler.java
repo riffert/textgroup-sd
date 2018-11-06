@@ -54,8 +54,6 @@ public class DatabaseHandler
 		@Autowired
 		private SomethingRepository somethingRepository;
 		
-		@Autowired
-		private EntityManager entityManager;
 		
 		/*_____________________________________________________________________________*/
 		

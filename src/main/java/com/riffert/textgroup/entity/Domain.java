@@ -74,7 +74,6 @@ public class Domain implements Serializable
 		}
 
 		public void setId(Long id) {
-			System.out.println("** Domain::setId() [sd]** :"+id);
 			this.id = id;
 		}
 		
@@ -88,7 +87,6 @@ public class Domain implements Serializable
 		}
 	
 		public void setName(String name) {
-			System.out.println("** Domain::setName() [sd]** : "+name);
 			this.name = name;
 		}	
 		
