@@ -189,10 +189,7 @@ public class EditController
 						
 						Long nUserId = Long.parseLong(userId);;
 						
-						if ( domain.getNextEquivalenceId() == nUserId)
-						{
-							domain.incrementNextEquivalenceId();
-						}
+						domain.incrementNextEquivalenceId();
 						
 						equivalence.setUserId(nUserId);
 						
