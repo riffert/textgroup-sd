@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -30,7 +27,7 @@ public class Domain implements Serializable
 			setNextEquivalenceId((long)1);
 		}
 		
-		private Domain()
+		public Domain()
 		{
 			super();
 		}
@@ -105,7 +102,8 @@ public class Domain implements Serializable
 		
 		/*________________________________________________________________________*/		
 		
-		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="domain")
+
+		@OneToMany(fetch = FetchType.LAZY,mappedBy="domain")
 		private List<Group> groups = new ArrayList<Group>();
 
 		public List<Group> getGroups() {
@@ -125,8 +123,6 @@ public class Domain implements Serializable
 
 		public Group getGroupByName(String groupName)
 		{
-			System.out.println("searched groupName : "+groupName);
-			
 			for (Group group:groups)
 				if ( group.getName().equals(groupName) )
 					return group;
@@ -143,9 +139,17 @@ public class Domain implements Serializable
 
 		/*________________________________________________________________________*/
 		
-		
-		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="domain")
+		@OneToMany(fetch = FetchType.LAZY,mappedBy="domain")
 		private List<Equivalence> equivalences = new ArrayList<Equivalence>();
+		
+		public Equivalence getEquivalence(int userId)
+		{
+				for (Equivalence equivalence:equivalences)
+					if ( equivalence.getUserId() == userId )
+						return equivalence;
+				
+				return null;
+		}
 
 		public List<Equivalence> getEquivalences() {
 			return equivalences;

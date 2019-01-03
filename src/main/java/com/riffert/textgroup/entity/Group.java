@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,17 +24,16 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name="groop")
 public class Group implements Serializable
 {
-		public Group(String name,String alpha2, String userName)
+		public Group(String name,String userName, String alpha2)
 		{
 			this();
 			setName(name);
-			setAlpha2(alpha2);
 			setUserName(userName);
 		}
 		
 		public Group(String name, String alpha2)
 		{
-			this(name,alpha2, "user"+name);
+			this(name,"user"+name, alpha2);
 		}
 		
 		public Group()
@@ -66,7 +64,7 @@ public class Group implements Serializable
 		
 		/*________________________________________________________________________*/
 
-		private String name;	// alpha3B (& random(4) if already present) 
+		private String name;  // alpha3B (& random(4) if already present) 
 		
 		public String getName() {
 			return name;
@@ -75,8 +73,7 @@ public class Group implements Serializable
 		public void setName(String name) {
 			this.name = name;
 		}
-
-
+		
 		/*________________________________________________________________________*/
 		
 		
@@ -133,13 +130,19 @@ public class Group implements Serializable
 
 		/*________________________________________________________________________*/
 		
-		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="group")
+
+		@OneToMany(fetch = FetchType.LAZY,mappedBy="group")
 		private List<Text> texts = new ArrayList<Text>();
 
 		public List<Text> getTexts() {
 			return texts;
 		}
 		
+		// pas très utile: rien à voir avec le userID de l'équivalence ..
+		public Text getText(int n)
+		{
+			return texts.get(n);
+		}
 	
 		public List<Text> getTextsFrom1()
 		{

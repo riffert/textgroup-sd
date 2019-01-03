@@ -23,6 +23,14 @@ public class Text implements Serializable
 			this();
 			setValue(value);
 		}
+		
+		public Text(Long id,String value)
+		{
+			this();
+			setValue(value);
+			setId(id);
+		}
+
 	
 		/*________________________________________________________________________*/
 
@@ -37,7 +45,6 @@ public class Text implements Serializable
 		public void setId(Long id) {
 			this.id = id;
 		}
-		
 		
 		/*________________________________________________________________________*/
 

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,6 +21,12 @@ public class Equivalence implements Serializable
 		public Equivalence()
 		{
 			super();
+		}
+		
+		public Equivalence(Long id)
+		{
+			this();
+			setId(id);
 		}
 
 		/*________________________________________________________________________*/
@@ -54,7 +59,8 @@ public class Equivalence implements Serializable
 		
 		/*________________________________________________________________________*/
 		
-		@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY,mappedBy="equivalence")
+
+		@OneToMany(fetch = FetchType.LAZY,mappedBy="equivalence")
 		private List<Text> texts = new ArrayList<Text>();
 
 		public List<Text> getTexts() {
@@ -69,6 +75,34 @@ public class Equivalence implements Serializable
 		{
 			texts.add(text);
 			text.setEquivalence(this);
+		}
+		
+		public Text getText(String language)
+		{
+			for (Text text:texts)
+				if ( text.getGroup().getName().equals(language) )
+					return text;
+			
+			return null;
+		}
+
+		// test (not working)
+		public Text getText(Group group)
+		{
+			for (Text text:texts)
+				if ( text.getGroup() == group )
+					return text;
+			
+			return null;
+		}
+
+		public Text getText(long groupID)
+		{
+			for (Text text:texts)
+				if ( text.getGroup().getId() == groupID )
+					return text;
+			
+			return null;
 		}
 		
 		
