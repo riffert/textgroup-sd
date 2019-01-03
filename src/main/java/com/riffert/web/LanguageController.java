@@ -23,6 +23,7 @@ public class LanguageController
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="0")int currentpage,
 				@RequestParam(defaultValue="eng")String groupname,
+				@RequestParam(defaultValue="en")String alpha2,
 				@RequestParam(defaultValue="")String keyword,
 				@RequestParam(defaultValue="")String dest,
 				@RequestParam(defaultValue="10")int pagesize)
@@ -49,6 +50,7 @@ public class LanguageController
 				model.addAttribute("keyword",keyword);
 				model.addAttribute("pagesize",pagesize);
 				model.addAttribute("groupname",groupname);
+				model.addAttribute("alpha2",alpha2);
 				model.addAttribute("dest",dest);
 				
 				model.addAttribute("navs", navs);			

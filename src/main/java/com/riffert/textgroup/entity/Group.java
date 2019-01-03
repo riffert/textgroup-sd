@@ -25,16 +25,17 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name="groop")
 public class Group implements Serializable
 {
-		public Group(String name,String userName)
+		public Group(String name,String alpha2, String userName)
 		{
 			this();
 			setName(name);
+			setAlpha2(alpha2);
 			setUserName(userName);
 		}
 		
-		public Group(String name)
+		public Group(String name, String alpha2)
 		{
-			this(name,"user"+name);
+			this(name,alpha2, "user"+name);
 		}
 		
 		public Group()
@@ -65,7 +66,7 @@ public class Group implements Serializable
 		
 		/*________________________________________________________________________*/
 
-		private String name;
+		private String name;	// alpha3B (& random(4) if already present) 
 		
 		public String getName() {
 			return name;
@@ -73,6 +74,21 @@ public class Group implements Serializable
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+
+		/*________________________________________________________________________*/
+		
+		
+		private String alpha2;
+		
+		//@Column(name = "alpha2", nullable = false, length = 50)
+		public String getAlpha2() {
+			return this.alpha2;
+		}
+
+		public void setAlpha2(String alpha2) {
+			this.alpha2 = alpha2;
 		}
 		
 		/*________________________________________________________________________*/

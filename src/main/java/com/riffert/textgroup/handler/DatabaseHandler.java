@@ -215,9 +215,9 @@ public class DatabaseHandler
 		/*_____________________________________________________________________________*/
 		
 		
-		public void addGroup(Domain domain,String groupName, String userGroupName)
+		public void addGroup(Domain domain,String groupName, String alpha2, String userGroupName)
 		{
-				addGroup(domain, new Group(groupName,userGroupName));
+				addGroup(domain, new Group(groupName,alpha2, userGroupName));
 		}
 		
 		

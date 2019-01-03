@@ -22,6 +22,7 @@ public class GroupController
 		public String addGroup(Model model,
 				@RequestParam(defaultValue="1")Domain domain,
 				@RequestParam(defaultValue="")String groupname,
+				@RequestParam(defaultValue="")String alpha2,
 				@RequestParam(defaultValue="")String usergroupname)
 		{		
 				// checking if groupname already present
@@ -33,7 +34,7 @@ public class GroupController
 					}
 				}
 			
-				databaseRequestService.addGroup(domain, groupname, usergroupname );
+				databaseRequestService.addGroup(domain, groupname, alpha2, usergroupname );
 			
 				return "redirect:/?domain="+domain.getId()+"&flag=1";
 		}
